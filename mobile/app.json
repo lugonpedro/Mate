@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
-    "version": "1.0.0",
+    "name": "MATE",
+    "slug": "MATE",
+    "version": "0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
