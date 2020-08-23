@@ -1,11 +1,34 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TextInput, Image, TouchableOpacity, Text } from 'react-native';
 
-import logo from '../../../assets/icon.png';
 import styles from './styles';
 
 export default function Login() {
+
+    function login() {
+
+
+    }
+
     return (
-        <View />
+        <View style={styles.container}>
+
+            <Image source={require('../../../assets/icon.png')} 
+            style={styles.logo}/>
+
+            <TextInput placeholder={"E-mail"}
+            style={styles.input}/>
+
+            <TextInput placeholder={"Senha"}
+            secureTextEntry={true}
+            style={styles.input}/>
+
+            <TouchableOpacity
+            style={styles.botao}
+            onPress={login}>
+                <Text style={styles.botaoText}>Entrar</Text>
+            </TouchableOpacity>
+
+        </View>
     );
 }
