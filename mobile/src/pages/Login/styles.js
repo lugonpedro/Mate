@@ -10,6 +10,7 @@ export default StyleSheet.create({
     logo: {
         width: 300,
         height: 100,
+        left: 10,
     },
     input: {
         marginTop: 10,

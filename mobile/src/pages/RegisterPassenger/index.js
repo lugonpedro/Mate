@@ -13,7 +13,7 @@ export default function RegisterPassenger() {
     }
 
     function register() {
-        navigation.navigate('')
+        navigation.navigate('Passenger')
     }
 
     return (
@@ -25,24 +25,26 @@ export default function RegisterPassenger() {
             </View>
 
             <View style={styles.container}>
-                <Image source={require('../../../assets/icon.png')}
-                    style={styles.logo} />
-
-                <TextInput placeholder={"E-mail"}
+                <Text style={styles.texto}>Registro de Passageiro</Text>
+                <TextInput placeholder={"Nome Completo"}
                     style={styles.input} />
 
-                <TextInput placeholder={"Senha"}
-                    secureTextEntry={true}
+                <TextInput placeholder={"Telefone"}
+                    keyboardType={'numeric'}
                     style={styles.input} />
 
-                <TextInput placeholder={"Confirme sua senha"}
-                    secureTextEntry={true}
+                <TextInput placeholder={"Data de Nascimento"}
+                    keyboardType={'numeric'}
+                    style={styles.input} />
+
+                <TextInput placeholder={"CPF"}
+                    keyboardType={'numeric'}
                     style={styles.input} />
 
                 <TouchableOpacity
                     style={styles.botao}
-                    onPress={() => {}}>
-                    <Text style={styles.botaoText}>Continuar</Text>
+                    onPress={register}>
+                    <Text style={styles.botaoText}>Cadastrar</Text>
                 </TouchableOpacity>
 
             </View>

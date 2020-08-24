@@ -8,10 +8,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#4A99C7',
     },
-    logo: {
-        width: 300,
-        height: 100,
-    },
     header: {
         paddingTop: Constants.statusBarHeight+20,
         marginRight: 310,
@@ -38,5 +34,10 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
+    },
+    texto: {
+        fontSize: 27,
+        fontWeight: 'bold',
+        bottom: 20,
     },
 })
