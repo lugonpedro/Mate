@@ -8,25 +8,23 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#4A99C7',
     },
-    logo: {
-        width: 300,
-        height: 100,
-    },
     header: {
         paddingTop: Constants.statusBarHeight+20,
         marginRight: 310,
     },
-    input: {
-        marginTop: 10,
-        padding: 10,
-        width: 300,
-        backgroundColor: '#fff',
+    box: {
+        padding: 24,
+        borderRadius: 8,
+        backgroundColor: '#FFF',
+        margin: 50,
+    },
+    botaoText: {
         fontSize: 16,
         fontWeight: 'bold',
-        borderRadius: 3,
+        color: 'black',
     },
     botao: {
-        width: 300,
+        width: 150,
         height: 42,
         backgroundColor: "#377294",
         marginTop: 10,
@@ -34,9 +32,4 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    botaoText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'black',
-    },
-})
+});

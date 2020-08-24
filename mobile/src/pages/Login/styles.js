@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
 
 export default StyleSheet.create({
     container: {
@@ -28,12 +27,25 @@ export default StyleSheet.create({
         marginTop: 10,
         borderRadius: 4,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     botaoText: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
     },
-
+    botaoDebaixo: {
+        backgroundColor: '#377294',
+        borderRadius: 4,
+        height: 42,
+        width: 140,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+    },
+    botoes: {
+        marginTop: 100,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
 })

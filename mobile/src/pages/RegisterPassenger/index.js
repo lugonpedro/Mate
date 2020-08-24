@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles';
 
-export default function Register() {
+export default function RegisterPassenger() {
     const navigation = useNavigation();
 
     function navigateBack() {
@@ -13,7 +13,7 @@ export default function Register() {
     }
 
     function register() {
-        navigation.navigate('RegisterChoose')
+        navigation.navigate('')
     }
 
     return (
@@ -41,7 +41,7 @@ export default function Register() {
 
                 <TouchableOpacity
                     style={styles.botao}
-                    onPress={register}>
+                    onPress={() => {}}>
                     <Text style={styles.botaoText}>Continuar</Text>
                 </TouchableOpacity>
 
