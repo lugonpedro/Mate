@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#4A99C7',
-        paddingTop: Constants.statusBarHeight+10,
+        paddingTop: Constants.statusBarHeight,
     },
     main: {
         alignItems: 'center',
@@ -17,15 +17,18 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
-        borderRadius: 5,
         paddingHorizontal: 20,
-        height: 75,
+        height: 65,
+        paddingTop: 2,
+        
     },
     headerText: {
+        left: 10,
         fontSize: 30,
         fontWeight: 'bold',
     },
     logo: {
+        left: 20,
         width: 70,
         height: 120,
     },
@@ -37,5 +40,6 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         borderRadius: 3,
+        elevation: 10,
     },
 })

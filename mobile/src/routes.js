@@ -34,19 +34,21 @@ export default function Routes() {
     }
 
     function Driver() {
+        return(
         <Tab.Navigator>
             <Tab.Screen name="Rota" component={DriverRoute} 
-            options={ {tabBarIcon: ({ color, size }) =>
+            options={{tabBarIcon: ({ color, size }) =>
             (<FontAwesome name="map" color={"black"} size={25} />)} }/>
             <Tab.Screen name="Perfil" component={DriverProfile} 
             options={ {tabBarIcon: ({ color, size }) =>
             (<FontAwesome name="user" color={"black"} size={25} />)} }/>
         </Tab.Navigator>
+        )
     }
 
     return (
         <NavigationContainer>
-            <AppStack.Navigator screenOptions={{ headerShown: false }}>
+            <AppStack.Navigator screenOptions={{headerShown: false}}>
                 <AppStack.Screen name="Login" component={Login} />
                 <AppStack.Screen name="Register" component={Register} />
                 <AppStack.Screen name="RegisterChoose" component={RegisterChoose} />
