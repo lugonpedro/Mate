@@ -5,9 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 
 import Login from './pages/Login';
-import Register from './pages/Register';
-import RegisterPassenger from './pages/RegisterPassenger';
-import PassRecover from './pages/PassRecover';
 import Route from './pages/Route';
 import Profile from './pages/Profile';
 
@@ -33,9 +30,6 @@ export default function Routes() {
         <NavigationContainer>
             <AppStack.Navigator screenOptions={{headerShown: false}}>
                 <AppStack.Screen name="Login" component={Login} />
-                <AppStack.Screen name="Register" component={Register} />
-                <AppStack.Screen name="RegisterPassenger" component={RegisterPassenger} />
-                <AppStack.Screen name="PassRecover" component={PassRecover} />
                 <AppStack.Screen name="Home" component={Home} />
             </AppStack.Navigator>
         </NavigationContainer>

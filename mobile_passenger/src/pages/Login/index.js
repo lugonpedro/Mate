@@ -36,18 +36,6 @@ export default function Login() {
         }
     }
 
-    async function loginFacebook() {
-
-    }
-
-    function register() {
-        navigation.navigate('Register')
-    }
-
-    function forgotpass() {
-
-    }
-
     return (
         <View style={styles.container}>
 
@@ -66,11 +54,11 @@ export default function Login() {
                 <Text style={styles.botaoText}>Entrar com Facebook</Text>
             </TouchableOpacity> */}
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={styles.botaoForgotPass}
                 onPress={forgotpass}>
                 <Text style={styles.botaoText}>Esqueci a senha</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         </View>
     );

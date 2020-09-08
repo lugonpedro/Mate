@@ -7,6 +7,11 @@ export default StyleSheet.create({
         backgroundColor: '#4A99C7',
         paddingTop: Constants.statusBarHeight,
     },
+    main: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+    },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',

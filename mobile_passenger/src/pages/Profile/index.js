@@ -24,8 +24,21 @@ export default function Passenger() {
                 <Image source={logo} style={styles.logo}/>
             </View>
 
-            <View style={styles.container}>
-            
+            <View style={styles.main}>
+            <TextInput placeholder={"Nome Completo"}
+                    style={styles.input} />
+
+                <TextInput placeholder={"Telefone"}
+                    keyboardType={'numeric'}
+                    style={styles.input} />
+
+                <TextInput placeholder={"Data de Nascimento"}
+                    keyboardType={'numeric'}
+                    style={styles.input} />
+
+                <TextInput placeholder={"CPF"}
+                    keyboardType={'numeric'}
+                    style={styles.input} />
 
             </View>
         </View>

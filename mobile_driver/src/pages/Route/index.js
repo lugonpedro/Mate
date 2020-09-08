@@ -24,7 +24,7 @@ export default function Driver() {
                 <Image source={logo} style={styles.logo}/>
             </View>
 
-            <View style={styles.container}>
+            <View style={styles.main}>
             
 
             </View>

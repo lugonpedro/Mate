@@ -7,6 +7,11 @@ export default StyleSheet.create({
         backgroundColor: '#4A99C7',
         paddingTop: Constants.statusBarHeight,
     },
+    main: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+    },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -25,5 +30,14 @@ export default StyleSheet.create({
         left: 20,
         width: 70,
         height: 120,
+    },
+    input: {
+        marginTop: 10,
+        padding: 10,
+        width: 300,
+        backgroundColor: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 3,
     },
 })
