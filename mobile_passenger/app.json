@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MATEpassenger",
-    "slug": "MATEP",
+    "name": "MATEp",
+    "slug": "MATEp",
     "version": "0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "com.m0tt4.MATEp"
     }
   }
 }

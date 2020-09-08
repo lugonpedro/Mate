@@ -1,14 +1,43 @@
 import React from 'react';
-import { View, TextInput, Image, TouchableOpacity, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import * as Google from 'expo-google-app-auth';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
+import { useNavigation, useLinkProps } from '@react-navigation/native';
 
 import styles from './styles';
 
 export default function Login() {
     const navigation = useNavigation();
 
-    function login() {
-        navigation.navigate('Home')
+    state = {
+        signedIn: false,
+        name: '',
+        photoUrl: '',
+    };
+
+    async function loginGoogle() {
+        try {
+            const result = await Google.logInAsync({
+                androidClientId: '804369863474-4vtbm9dsesk1anouteho4olavv2funpk.apps.googleusercontent.com',
+                scopes: ['profile', 'email']
+            })
+
+            if (result.type === 'success') {
+                navigation.navigate('Home')
+                this.setState({
+                    signedIn: true,
+                    name: result.user.name,
+                    photoUrl: result.user.photoUrl,
+                })
+            } else {
+                return { cancelled: true }
+            }
+        } catch (e) {
+            return { error: true }
+        }
+    }
+
+    async function loginFacebook() {
+
     }
 
     function register() {
@@ -25,33 +54,24 @@ export default function Login() {
             <Image source={require('../../../assets/icon.png')}
                 style={styles.logo} />
 
-            <TextInput placeholder={"E-mail"}
-                style={styles.input} />
-
-            <TextInput placeholder={"Senha"}
-                secureTextEntry={true}
-                style={styles.input} />
-
             <TouchableOpacity
                 style={styles.botao}
-                onPress={login}>
-                <Text style={styles.botaoText}>Entrar</Text>
+                onPress={loginGoogle}>
+                <Text style={styles.botaoText}>Entrar com Google</Text>
             </TouchableOpacity>
 
-            <View 
-            style={styles.botoes}>
-                <TouchableOpacity
-                    style={styles.botaoDebaixo}
-                    onPress={register}>
-                    <Text style={styles.botaoText}>Registrar-se</Text>
-                </TouchableOpacity>
+            {/* <TouchableOpacity
+                style={styles.botao}
+                onPress={loginFacebook}>
+                <Text style={styles.botaoText}>Entrar com Facebook</Text>
+            </TouchableOpacity> */}
 
-                <TouchableOpacity
-                    style={styles.botaoDebaixo}
-                    onPress={forgotpass}>
-                    <Text style={styles.botaoText}>Esqueci a senha</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                style={styles.botaoForgotPass}
+                onPress={forgotpass}>
+                <Text style={styles.botaoText}>Esqueci a senha</Text>
+            </TouchableOpacity>
+
         </View>
     );
 }

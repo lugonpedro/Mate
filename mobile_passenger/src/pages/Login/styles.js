@@ -35,14 +35,15 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    botaoDebaixo: {
-        backgroundColor: '#377294',
-        borderRadius: 4,
+    botaoForgotPass: {
+        width: 300,
         height: 42,
-        width: 140,
-        justifyContent: 'center',
+        backgroundColor: "#377294",
+        marginTop: 10,
+        borderRadius: 4,
         alignItems: 'center',
-        margin: 10,
+        justifyContent: 'center',
+        marginTop: 100,
     },
     botoes: {
         marginTop: 100,
