@@ -14,6 +14,10 @@ export default function Login() {
         photoUrl: '',
     };
 
+    function loginDev() {
+        navigation.navigate('Home')
+    }
+
     async function loginGoogle() {
         try {
             const result = await Google.logInAsync({
@@ -46,6 +50,12 @@ export default function Login() {
                 style={styles.botao}
                 onPress={loginGoogle}>
                 <Text style={styles.botaoText}>Entrar com Google</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.botao}
+                onPress={loginDev}>
+                <Text style={styles.botaoText}>Entrar como Dev</Text>
             </TouchableOpacity>
 
             {/* <TouchableOpacity

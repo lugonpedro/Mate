@@ -7,7 +7,7 @@ import styles from './styles';
 
 import logo from '../../../assets/icon.png';
 
-export default function Passenger() {
+export default function Profile() {
     const navigation = useNavigation();
 
     function signOut() {
@@ -17,11 +17,11 @@ export default function Passenger() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={signOut}>
+                {/* <TouchableOpacity onPress={signOut}>
                     <FontAwesome name="sign-out" size={30} color="black" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <Text style={styles.headerText}>MATE</Text>
-                <Image source={logo} style={styles.logo}/>
+                {/* <Image source={logo} style={styles.logo}/> */}
             </View>
 
             <View style={styles.main}>

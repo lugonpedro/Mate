@@ -7,23 +7,16 @@ export default StyleSheet.create({
         backgroundColor: '#4A99C7',
         paddingTop: Constants.statusBarHeight,
     },
-    main: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
-    },
     header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
         paddingHorizontal: 20,
-        height: 65,
+        height: 60,
         paddingTop: 2,
-        
+        elevation: 10,
     },
     headerText: {
-        left: 10,
         fontSize: 30,
         fontWeight: 'bold',
     },
@@ -32,14 +25,11 @@ export default StyleSheet.create({
         width: 70,
         height: 120,
     },
-    input: {
-        marginTop: 10,
-        padding: 10,
-        width: 300,
-        backgroundColor: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-        borderRadius: 3,
-        elevation: 10,
+    textInput: {
+        width: '100%',
+    },
+    map: {
+        width: '100%',
+        height: '100%',
     },
 })
