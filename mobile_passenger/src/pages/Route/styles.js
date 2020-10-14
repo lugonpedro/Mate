@@ -21,15 +21,26 @@ export default StyleSheet.create({
         fontWeight: 'bold',
     },
     logo: {
-        left: 20,
+        left: 10,
         width: 70,
         height: 120,
     },
-    textInput: {
-        width: '100%',
+    main: {
+        alignItems: 'center',
     },
-    map: {
-        width: '100%',
-        height: '100%',
+    botao: {
+        position: 'absolute',
+        marginTop: 475,
+        width: 350,
+        height: 42,
+        backgroundColor: "#5DC1FB",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
     },
 })

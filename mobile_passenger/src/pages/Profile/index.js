@@ -17,11 +17,7 @@ export default function Profile() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                {/* <TouchableOpacity onPress={signOut}>
-                    <FontAwesome name="sign-out" size={30} color="black" />
-                </TouchableOpacity> */}
-                <Text style={styles.headerText}>MATE</Text>
-                {/* <Image source={logo} style={styles.logo}/> */}
+                <Image source={logo} style={styles.logo}/>
             </View>
 
             <View style={styles.main}>
