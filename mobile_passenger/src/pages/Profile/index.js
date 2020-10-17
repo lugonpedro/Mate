@@ -10,10 +10,6 @@ import logo from '../../../assets/icon.png';
 export default function Profile() {
     const navigation = useNavigation();
 
-    function signOut() {
-        navigation.navigate('Login')
-    }
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>

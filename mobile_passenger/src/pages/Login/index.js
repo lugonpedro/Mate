@@ -64,12 +64,6 @@ export default function Login() {
                 <Text style={styles.botaoText}>Entrar com Facebook</Text>
             </TouchableOpacity> */}
 
-            {/* <TouchableOpacity
-                style={styles.botaoForgotPass}
-                onPress={forgotpass}>
-                <Text style={styles.botaoText}>Esqueci a senha</Text>
-            </TouchableOpacity> */}
-
         </View>
     );
 }

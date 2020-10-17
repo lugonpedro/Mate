@@ -8,7 +8,8 @@ export default StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
     },
     header: {
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
         paddingHorizontal: 20,
@@ -16,19 +17,32 @@ export default StyleSheet.create({
         paddingTop: 2,
         elevation: 10,
     },
-    headerText: {
-        fontSize: 30,
-        fontWeight: 'bold',
-    },
     logo: {
         left: 10,
         width: 70,
         height: 120,
     },
+    botaoFlatlist: {
+        marginTop: 1,
+        width: 40,
+        height: 40,
+        backgroundColor: "#5DC1FB",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoTextFlatlist: {
+        fontSize: 16,
+        color: 'black',
+    },
+    text: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    item: {
+        margin: 10,
+    },
     botao: {
-        position: 'absolute',
-        marginTop: 475,
-        marginLeft: 30,
+        marginTop: 300,
         width: 350,
         height: 42,
         backgroundColor: "#5DC1FB",
@@ -38,7 +52,7 @@ export default StyleSheet.create({
     },
     botaoText: {
         fontSize: 16,
-        fontWeight: 'bold',
         color: 'black',
+        fontWeight: 'bold',
     },
 })

@@ -1,13 +1,15 @@
 import React from 'react';
 import MapView from 'react-native-maps';
+import { View } from 'react-native';
+import SearchEsta from '../SearchEsta';
+import SearchVai from '../SearchVai';
+import Directions from '../Directions';
 
 export default class Map extends React.Component {
 
     state = {
-        region: {
-            latitude: 0,
-            longitude: 0
-        },
+        region: null,
+        destination: null,
     };
 
     componentDidMount() {
@@ -17,6 +19,8 @@ export default class Map extends React.Component {
                     region: {
                         latitude,
                         longitude,
+                        latitudeDelta: 0.0143,
+                        longitudeDelta: 0.0134,
                     }
                 });
             }, // sucesso
@@ -29,21 +33,45 @@ export default class Map extends React.Component {
         )
     }
 
+    handleLocationSelected = (data, { geometry }) => {
+        const { 
+            location: { lat: latitude, lng: longitude } 
+        } = geometry;
+
+        this.setState({
+            destination: {
+                latitude,
+                longitude,
+                title: data.structured_formatting.main_text,
+            }
+        })
+    }
+
     render() {
+        const { region, destination } = this.state;
+
         return (
-            <MapView style={{
-                width: '100%',
-                height: '100%'
-            }}
-                region={{
-                    latitude: this.state.region.latitude,
-                    longitude: this.state.region.longitude,
-                    latitudeDelta: 0.0143,
-                    longitudeDelta: 0.0134
+            <View>
+                <MapView style={{
+                    width: '100%',
+                    height: '100%',
                 }}
-                showsUserLocation
-                loadingEnabled
-            />
+                    region={region}
+                    showsUserLocation
+                    loadingEnabled
+                >
+                    {destination && (
+                        <Directions
+                            origin={region}
+                            destination={destination}
+                            onReady={() => {}}
+                        />
+                    )}
+                </MapView>
+                <SearchEsta onLocationSelected={this.handleLocationSelected} />
+                {/* <SearchVai /> */}
+            </View>
         );
+
     }
 }

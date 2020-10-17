@@ -7,6 +7,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import Login from './pages/Login';
 import Route from './pages/Route';
 import Profile from './pages/Profile';
+import DaySelection from './pages/DaySelection';
+import DriverSelection from './pages/DriverSelection';
 
 const AppStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,6 +33,8 @@ export default function Routes() {
             <AppStack.Navigator screenOptions={{headerShown: false}}>
                 <AppStack.Screen name="Login" component={Login} />
                 <AppStack.Screen name="Home" component={Home} />
+                <AppStack.Screen name="DaySelection" component={DaySelection} />
+                <AppStack.Screen name="DriverSelection" component={DriverSelection} />
             </AppStack.Navigator>
         </NavigationContainer>
     );

@@ -8,7 +8,8 @@ export default StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
     },
     header: {
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
         paddingHorizontal: 20,
@@ -16,29 +17,12 @@ export default StyleSheet.create({
         paddingTop: 2,
         elevation: 10,
     },
-    headerText: {
-        fontSize: 30,
-        fontWeight: 'bold',
-    },
     logo: {
         left: 10,
         width: 70,
         height: 120,
     },
-    botao: {
-        position: 'absolute',
-        marginTop: 475,
-        marginLeft: 30,
-        width: 350,
-        height: 42,
-        backgroundColor: "#5DC1FB",
-        borderRadius: 4,
+    main: {
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    botaoText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'black',
     },
 })
