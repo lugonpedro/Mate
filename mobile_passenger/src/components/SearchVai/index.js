@@ -4,11 +4,13 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 export default class SearchVai extends React.Component {
 
     render() {
+        const { onLocationSelected } = this.props;
+
         return (
             <GooglePlacesAutocomplete
                 placeholder="Onde Estuda"
                 fetchDetails={true}
-                onPress={() => {}}
+                onPress={onLocationSelected}
                 query={{
                     // available options: https://developers.google.com/places/web-service/autocomplete
                     key: 'AIzaSyC-0wZK4QIMROxSg93uIctMRf-p-keq9Ww',

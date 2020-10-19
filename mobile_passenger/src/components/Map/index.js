@@ -1,15 +1,19 @@
-import React from 'react';
-import MapView from 'react-native-maps';
-import { View } from 'react-native';
+import React, { Fragment } from 'react';
+import MapView, { Marker } from 'react-native-maps';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { useNavigation, useNavigaton } from '@react-navigation/native';
 import SearchEsta from '../SearchEsta';
 import SearchVai from '../SearchVai';
 import Directions from '../Directions';
+
+import markerImage from '../../../assets/marker.png';
 
 export default class Map extends React.Component {
 
     state = {
         region: null,
-        destination: null,
+        destinationStay: null,
+        destinationGoing: null,
     };
 
     componentDidMount() {
@@ -33,13 +37,13 @@ export default class Map extends React.Component {
         )
     }
 
-    handleLocationSelected = (data, { geometry }) => {
-        const { 
-            location: { lat: latitude, lng: longitude } 
+    handleLocationStaySelected = (data, { geometry }) => {
+        const {
+            location: { lat: latitude, lng: longitude }
         } = geometry;
 
         this.setState({
-            destination: {
+            destinationStay: {
                 latitude,
                 longitude,
                 title: data.structured_formatting.main_text,
@@ -47,8 +51,32 @@ export default class Map extends React.Component {
         })
     }
 
+    handleLocationGoingSelected = (data, { geometry }) => {
+        const {
+            location: { lat: latitude, lng: longitude }
+        } = geometry;
+
+        this.setState({
+            destinationGoing: {
+                latitude,
+                longitude,
+                title: data.structured_formatting.main_text,
+            }
+        })
+    }
+
+    dayButton = ({ navigation }) => {
+        return (
+            <TouchableOpacity
+                style={styles.botao}
+                onPress={() => { }}>
+                <Text style={styles.botaoText}>Escolher Dia e Hora</Text>
+            </TouchableOpacity>
+        )
+    }
+
     render() {
-        const { region, destination } = this.state;
+        const { region, destinationStay, destinationGoing } = this.state;
 
         return (
             <View>
@@ -59,19 +87,44 @@ export default class Map extends React.Component {
                     region={region}
                     showsUserLocation
                     loadingEnabled
+                    ref={el => this.mapView = el}
                 >
-                    {destination && (
-                        <Directions
-                            origin={region}
-                            destination={destination}
-                            onReady={() => {}}
-                        />
+                    {destinationStay && (
+                        <Marker
+                            coordinate={destinationStay}
+                            anchor={{ x: 0.6, y: 0.6 }}
+                            image={markerImage}>
+                        </Marker>
+                    )}
+
+                    {destinationGoing && (
+                        <Fragment>
+                            <Directions
+                                origin={destinationStay}
+                                destination={destinationGoing}
+                                onReady={result => {
+                                    this.mapView.fitToCoordinates(result.coordinates);
+                                }}
+                            />
+                            <Marker
+                                coordinate={destinationGoing}
+                                anchor={{ x: 0.6, y: 0.6 }}
+                                image={markerImage}>
+
+                            </Marker>
+                        </Fragment>
                     )}
                 </MapView>
-                <SearchEsta onLocationSelected={this.handleLocationSelected} />
-                {/* <SearchVai /> */}
+
+                <SearchEsta onLocationSelected={this.handleLocationStaySelected} />
+                <SearchVai onLocationSelected={this.handleLocationGoingSelected} />
+
+                {destinationStay && destinationGoing && (
+                    <Fragment>
+                        dayButton
+                    </Fragment>
+                )}
             </View>
         );
-
     }
 }
