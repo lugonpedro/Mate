@@ -22,7 +22,7 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-
+                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
             </View>
         </View>
     );

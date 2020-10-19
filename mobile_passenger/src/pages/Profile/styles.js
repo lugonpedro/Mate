@@ -39,4 +39,27 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         borderRadius: 3,
     },
+    botaoEditar: {
+        marginTop: 240,
+        width: 350,
+        height: 42,
+        backgroundColor: "#326888",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoSalvar: {
+        marginTop: 240,
+        width: 350,
+        height: 42,
+        backgroundColor: "#5DC1FB",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+    },
 })

@@ -1,11 +1,17 @@
 import React from 'react';
-import { View, Image, Text, Alert, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 import Map from '../../components/Map';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 
 export default function Route() {
+    const navigation = useNavigation();
+
+    function goToDaySelection() {
+        navigation.navigate('DaySelection')
+    }
 
     return (
         <View style={styles.container}>
@@ -15,6 +21,11 @@ export default function Route() {
 
             <View>
                 <Map />
+                <TouchableOpacity
+                    style={styles.botao}
+                    onPress={goToDaySelection}>
+                    <Text style={styles.botaoText}>Escolher Dia e Turno</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

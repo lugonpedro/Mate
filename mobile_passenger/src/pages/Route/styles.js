@@ -25,4 +25,20 @@ export default StyleSheet.create({
         width: 70,
         height: 120,
     },
+    botao: {
+        position: 'absolute',
+        marginTop: 480,
+        marginLeft: 30,
+        width: 350,
+        height: 42,
+        backgroundColor: "#4A99C7",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+    },
 })

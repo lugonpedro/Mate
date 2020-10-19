@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { View, TouchableOpacity, Text } from 'react-native';
-import { useNavigation, useNavigaton } from '@react-navigation/native';
+import { View } from 'react-native';
+
 import SearchEsta from '../SearchEsta';
 import SearchVai from '../SearchVai';
 import Directions from '../Directions';
@@ -65,16 +65,6 @@ export default class Map extends React.Component {
         })
     }
 
-    dayButton = ({ navigation }) => {
-        return (
-            <TouchableOpacity
-                style={styles.botao}
-                onPress={() => { }}>
-                <Text style={styles.botaoText}>Escolher Dia e Hora</Text>
-            </TouchableOpacity>
-        )
-    }
-
     render() {
         const { region, destinationStay, destinationGoing } = this.state;
 
@@ -119,11 +109,6 @@ export default class Map extends React.Component {
                 <SearchEsta onLocationSelected={this.handleLocationStaySelected} />
                 <SearchVai onLocationSelected={this.handleLocationGoingSelected} />
 
-                {destinationStay && destinationGoing && (
-                    <Fragment>
-                        dayButton
-                    </Fragment>
-                )}
             </View>
         );
     }
