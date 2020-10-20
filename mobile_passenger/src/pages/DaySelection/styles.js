@@ -22,14 +22,6 @@ export default StyleSheet.create({
         width: 70,
         height: 120,
     },
-    botaoFlatlist: {
-        marginTop: 1,
-        width: 40,
-        height: 40,
-        backgroundColor: "#5DC1FB",
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     botaoTextFlatlist: {
         fontSize: 16,
         color: 'black',
@@ -37,9 +29,6 @@ export default StyleSheet.create({
     text: {
         fontSize: 18,
         fontWeight: 'bold',
-    },
-    item: {
-        margin: 10,
     },
     botao: {
         marginTop: 300,

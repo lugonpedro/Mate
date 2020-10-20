@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import SearchEsta from '../SearchEsta';
 import SearchVai from '../SearchVai';
 import Directions from '../Directions';
 
-import markerImage from '../../../assets/marker.png';
+import markerStay from '../../../assets/mstay.png';
+import markerGoing from '../../../assets/mgo.png';
 
 export default class Map extends React.Component {
 
@@ -83,7 +84,9 @@ export default class Map extends React.Component {
                         <Marker
                             coordinate={destinationStay}
                             anchor={{ x: 0.6, y: 0.6 }}
-                            image={markerImage}>
+                            image={markerStay}
+                            title={destinationStay.title}
+                            description={"Saindo daqui"}>
                         </Marker>
                     )}
 
@@ -99,8 +102,9 @@ export default class Map extends React.Component {
                             <Marker
                                 coordinate={destinationGoing}
                                 anchor={{ x: 0.6, y: 0.6 }}
-                                image={markerImage}>
-
+                                image={markerGoing}
+                                title={destinationGoing.title}
+                                description={"Chegando aqui"}>
                             </Marker>
                         </Fragment>
                     )}

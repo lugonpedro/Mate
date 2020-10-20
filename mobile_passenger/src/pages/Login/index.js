@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Google from 'expo-google-app-auth';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
-import { useNavigation, useLinkProps } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
