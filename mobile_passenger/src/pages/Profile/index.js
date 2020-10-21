@@ -21,7 +21,8 @@ export default function Profile() {
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
                     defaultValue={""}
-                    editable={editable} />
+                    editable={editable}
+                />
 
                 <TextInput placeholder={"Telefone"}
                     keyboardType={'numeric'}
