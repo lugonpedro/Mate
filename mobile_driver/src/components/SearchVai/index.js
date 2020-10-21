@@ -8,7 +8,7 @@ export default class SearchVai extends React.Component {
 
         return (
             <GooglePlacesAutocomplete
-                placeholder="Onde Estuda"
+                placeholder="Onde Trabalha"
                 fetchDetails={true}
                 onPress={onLocationSelected}
                 query={{

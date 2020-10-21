@@ -9,6 +9,7 @@ import Route from './pages/Route';
 import Profile from './pages/Profile';
 import DaySelection from './pages/DaySelection';
 import DriverSelection from './pages/DriverSelection';
+import ServiceDetails from './pages/ServiceDetails';
 
 const AppStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,6 +36,7 @@ export default function Routes() {
                 <AppStack.Screen name="Home" component={Home} />
                 <AppStack.Screen name="DaySelection" component={DaySelection} />
                 <AppStack.Screen name="DriverSelection" component={DriverSelection} />
+                <AppStack.Screen name="ServiceDetails" component={ServiceDetails} />                
             </AppStack.Navigator>
         </NavigationContainer>
     );

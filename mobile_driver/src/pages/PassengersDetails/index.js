@@ -5,7 +5,7 @@ import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function DriverSelection() {
+export default function PassengersDetails() {
     const navigation = useNavigation();
 
     function navigateBack() {
@@ -22,7 +22,9 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
+                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros Confirmados</Text>
+                
+                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros Pendentes</Text>
             </View>
         </View>
     );

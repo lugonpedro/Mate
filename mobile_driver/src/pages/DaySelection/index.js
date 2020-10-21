@@ -33,8 +33,8 @@ export default function DaySelection() {
 
                 <TouchableOpacity
                     style={styles.botao}
-                    onPress={() => navigation.navigate('DriverSelection')}>
-                    <Text style={styles.botaoText}>Ver Motoristas</Text>
+                    onPress={() => navigation.navigate('PassengersDetails')}>
+                    <Text style={styles.botaoText}>Ver Passageiros</Text>
                 </TouchableOpacity>
             </View>
         </View>
