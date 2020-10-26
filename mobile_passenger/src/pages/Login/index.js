@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Google from 'expo-google-app-auth';
-import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, Image, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
@@ -37,27 +37,6 @@ export default function Login() {
         navigation.navigate('Home')
     }
 
-    async function loginGoogle() {
-        try {
-            const result = await Google.logInAsync({
-                androidClientId: '804369863474-4vtbm9dsesk1anouteho4olavv2funpk.apps.googleusercontent.com',
-                scopes: ['profile', 'email']
-            })
-
-            if (result.type === 'success') {
-                navigation.navigate('Home')
-                this.setState({
-                    signedIn: true,
-                    name: result.user.name,
-                    photoUrl: result.user.photoUrl,
-                })
-            } else {
-                return { cancelled: true }
-            }
-        } catch (e) {
-            return { error: true }
-        }
-    }
     return (
         <View style={styles.container}>
 
@@ -88,17 +67,10 @@ export default function Login() {
             />
 
             <TouchableOpacity
-                style={styles.buttonSubmit}
+                style={styles.botao}
                 onPress={loginEmailSenha}
             >
-                <Text style={styles.submitText}>Acessar</Text>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity
-                style={styles.botao}
-                onPress={loginGoogle}>
-                <Text style={styles.botaoText}>Entrar com Google</Text>
+                <Text style={styles.botaoText}>Acessar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

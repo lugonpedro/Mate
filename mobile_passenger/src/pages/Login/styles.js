@@ -50,18 +50,26 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-
-    //Testando layout imput e button 
     input: {
-        backgroundColor: '#FFF',
-        width: '90%',
-        marginBottom: 15,
-        color: '#222',
-        fontSize: 22,
-        borderRadius: 7,
-        padding: 10
+        marginTop: 10,
+        padding: 10,
+        width: 300,
+        backgroundColor: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 3,
     },
 
+    //Testando layout imput e button 
+    // input: {
+    //     backgroundColor: '#FFF',
+    //     width: '90%',
+    //     marginBottom: 15,
+    //     color: '#222',
+    //     fontSize: 22,
+    //     borderRadius: 7,
+    //     padding: 10
+    // },
     buttonSubmit: {
         backgroundColor: '#59BFFF',
         width: '90%',
