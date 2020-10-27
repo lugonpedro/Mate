@@ -12,6 +12,10 @@ export default function DriverSelection() {
         navigation.goBack()
     }
 
+    function goToDriver() {
+        navigation.navigate('ServiceDetails')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -22,8 +26,24 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
+                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
+
+                {/* array.forEach(element => { */}
+                <TouchableOpacity style={styles.card} onPress={goToDriver}>
+                    <Text style={styles.textNome}>Nome do Motorista</Text>
+                    <Text>Turno</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text>Saida</Text>
+                        <Text> - </Text>
+                        <Text>Chegada</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold'}}>4,5</Text>
+                        <FontAwesome name="star" size={18} color={"black"} />
+                    </View>
+                </TouchableOpacity>
+                {/* }); */}
             </View>
-        </View>
+        </View >
     );
 }

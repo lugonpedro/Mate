@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -22,7 +22,37 @@ export default function ServiceDetails() {
             </View>
 
             <View style={styles.main}>
-                
+                <TextInput placeholder={"Nome do Motorista"}
+                    style={styles.input}
+                    defaultValue={""}
+                    editable={false}
+                />
+
+                <TextInput placeholder={"Turno"}
+                    style={styles.input}
+                    defaultValue={""}
+                    editable={false} />
+
+                <TextInput placeholder={"Local de Saida"}
+                    style={styles.input}
+                    defaultValue={""}
+                    editable={false} />
+
+                <TextInput placeholder={"Local de Chegada"}
+                    style={styles.input}
+                    defaultValue={""}
+                    editable={false} />
+
+                <TextInput placeholder={"Dias de Trabalho"}
+                    style={styles.input}
+                    defaultValue={""}
+                    editable={false} />
+
+                <TouchableOpacity
+                    style={styles.botao}
+                    onPress={() => {}}>
+                    <Text style={styles.botaoText}>Solicitar Servico</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

@@ -25,4 +25,19 @@ export default StyleSheet.create({
     main: {
         alignItems: 'center',
     },
+    card: {
+        height: 100,
+        width: 300,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textNome: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    textNota: {
+        paddingLeft: 250,
+    },
 })
