@@ -10,6 +10,7 @@ import 'firebase/auth';
 
 export default function Login() {
 
+    const navigation = useNavigation();
 
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
@@ -25,7 +26,7 @@ export default function Login() {
         });
     }
 
-    const navigation = useNavigation();
+
 
     state = {
         signedIn: false,
