@@ -1,1 +1,1 @@
-# Instruções para rodar o projeto na brench `dev`
+# Instruções para rodar o projeto na branch `dev`
