@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
-import * as Google from 'expo-google-app-auth';
 import { View, Image, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
-import firebase from '../../config/firebase';
+import firebase from 'firebase';
 import 'firebase/auth';
 
 export default function Login() {
 
     const navigation = useNavigation();
 
-    const [email, setEmail] = useState();
-    const [senha, setSenha] = useState();
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
     function loginEmailSenha() {
-        firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-            Alert.alert("USUÁRIO LOGADO!");
-            console.log('USUÁRIO LOGADO!');
-        }).catch(erro => {
-            Alert.alert(erro);
-            console.log("Erro ao logar!");
 
-        });
+        try {
+            if (email.length < 5 && senha.length < 1) {
+                Alert.alert("Credenciais invalidas");
+            } else {
+                firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
+                    Alert.alert("USUÁRIO LOGADO!");
+                    navigation.navigate('Home')
+                });
+            }
+        } catch (error) {
+            Alert.alert("Erro ao logar!");
+            console.log(erro);
+        }
     }
-
-
 
     state = {
         signedIn: false,
@@ -52,7 +55,7 @@ export default function Login() {
                 autoCapitalize="none"
                 autoCompleteType="email"
                 autoCorrect={false}
-                onChange={(e) => setEmail(e.target.value)}
+                onChangeText={email => setEmail(email)}
             />
 
             <TextInput
@@ -64,7 +67,7 @@ export default function Login() {
                 autoCompleteType="password"
                 autoCorrect={false}
                 secureTextEntry={true}
-                onChange={(e) => setSenha(e.target.value)}
+                onChangeText={senha => setSenha(senha)}
             />
 
             <TouchableOpacity
