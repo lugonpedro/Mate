@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import * as Google from 'expo-google-app-auth';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
-import firebase from '../../config/firebase';
+import firebase from 'firebase';
 import 'firebase/auth';
 
 export default function Login() {
