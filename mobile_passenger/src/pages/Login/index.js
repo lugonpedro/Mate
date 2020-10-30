@@ -17,11 +17,10 @@ export default function Login() {
     function loginEmailSenha() {
 
         try {
-            if (email.length < 5 && senha.length < 1) {
+            if (email.length < 5 && senha.length < 4) {
                 Alert.alert("Credenciais invalidas");
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-                    Alert.alert("USUÁRIO LOGADO!");
                     navigation.navigate('Home')
                 });
             }
@@ -36,10 +35,6 @@ export default function Login() {
         name: '',
         photoUrl: '',
     };
-
-    function loginDev() {
-        navigation.navigate('Home')
-    }
 
     return (
         <View style={styles.container}>
@@ -76,18 +71,6 @@ export default function Login() {
             >
                 <Text style={styles.botaoText}>Acessar</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.botao}
-                onPress={loginDev}>
-                <Text style={styles.botaoText}>Entrar como Dev</Text>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity
-                style={styles.botao}
-                onPress={loginFacebook}>
-                <Text style={styles.botaoText}>Entrar com Facebook</Text>
-            </TouchableOpacity> */}
 
         </View>
     );

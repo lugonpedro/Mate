@@ -14,11 +14,19 @@ export default function Login() {
     const [senha, setSenha] = useState();
 
     function loginEmailSenha() {
-        firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-            console.log('USUÁRIO LOGADO!');
-        }).catch(erro => {
-            console.log("Erro ao logar!");
-        });
+
+        try {
+            if (email.length < 5 && senha.length < 4) {
+                Alert.alert("Credenciais invalidas");
+            } else {
+                firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
+                    navigation.navigate('Home')
+                });
+            }
+        } catch (error) {
+            Alert.alert("Erro ao logar!");
+            console.log(erro);
+        }
     }
 
     state = {
@@ -26,32 +34,6 @@ export default function Login() {
         name: '',
         photoUrl: '',
     };
-
-    function loginDev() {
-        navigation.navigate('Home')
-    }
-
-    /*async function loginGoogle() {
-        try {
-            const result = await Google.logInAsync({
-                androidClientId: '804369863474-4vtbm9dsesk1anouteho4olavv2funpk.apps.googleusercontent.com',
-                scopes: ['profile', 'email']
-            })
-
-            if (result.type === 'success') {
-                navigation.navigate('Home')
-                this.setState({
-                    signedIn: true,
-                    name: result.user.name,
-                    photoUrl: result.user.photoUrl,
-                })
-            } else {
-                return { cancelled: true }
-            }
-        } catch (e) {
-            return { error: true }
-        }
-    }*/
 
     return (
         <View style={styles.container}>
@@ -67,7 +49,7 @@ export default function Login() {
                 autoCapitalize="none"
                 autoCompleteType="email"
                 autoCorrect={false}
-                onChange={(e) => setEmail(e.target.value)}
+                onChangeText={email => setEmail(email)}
             />
 
             <TextInput
@@ -79,14 +61,8 @@ export default function Login() {
                 autoCompleteType="password"
                 autoCorrect={false}
                 secureTextEntry={true}
-                onChange={(e) => setSenha(e.target.value)}
+                onChangeText={senha => setSenha(senha)}
             />
-
-            {/*<TouchableOpacity
-                style={styles.botao}
-                onPress={loginGoogle}>
-                <Text style={styles.botaoText}>Entrar com Google</Text>
-            </TouchableOpacity>*/}
 
             <TouchableOpacity
                 style={styles.botao}
@@ -94,18 +70,6 @@ export default function Login() {
             >
                 <Text style={styles.botaoText}>Acessar</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.botao}
-                onPress={loginDev}>
-                <Text style={styles.botaoText}>Entrar como Dev</Text>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity
-                style={styles.botao}
-                onPress={loginFacebook}>
-                <Text style={styles.botaoText}>Entrar com Facebook</Text>
-            </TouchableOpacity> */}
 
         </View>
     );
