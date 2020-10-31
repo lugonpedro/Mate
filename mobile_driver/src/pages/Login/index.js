@@ -71,6 +71,12 @@ export default function Login() {
                 <Text style={styles.botaoText}>Acessar</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity
+                style={styles.botaoRegister}
+                onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.botaoText}>Registrar</Text>
+            </TouchableOpacity>
+
         </View>
     );
 }
