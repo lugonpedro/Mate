@@ -35,7 +35,7 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    botaoRegister: {
+    botaoVoltar: {
         width: 300,
         height: 42,
         backgroundColor: "#377294",
@@ -44,4 +44,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    olho: {
+        position: 'absolute',
+        right: 70,
+        top: 365,
+    }
 })

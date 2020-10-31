@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -28,21 +28,24 @@ export default function DriverSelection() {
             <View style={styles.main}>
                 <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
 
-                {/* array.forEach(element => { */}
-                <TouchableOpacity style={styles.card} onPress={goToDriver}>
-                    <Text style={styles.textNome}>Nome do Motorista</Text>
-                    <Text>Turno</Text>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text>Saida</Text>
-                        <Text> - </Text>
-                        <Text>Chegada</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold'}}>4,5</Text>
-                        <FontAwesome name="star" size={18} color={"black"} />
-                    </View>
-                </TouchableOpacity>
-                {/* }); */}
+                <ScrollView>
+                    {/* array.forEach(element => { */}
+                    <TouchableOpacity style={styles.card} onPress={goToDriver}>
+                        <Text style={styles.textNome}>Nome do Motorista</Text>
+                        <Text>Turno</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text>Saida</Text>
+                            <Text> - </Text>
+                            <Text>Chegada</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold' }}>4,5</Text>
+                            <FontAwesome name="star" size={18} color={"black"} />
+                        </View>
+                    </TouchableOpacity>
+                    {/* }); */}
+                </ScrollView>
+
             </View>
         </View >
     );

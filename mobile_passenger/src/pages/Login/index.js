@@ -14,10 +14,10 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    function loginEmailSenha() {
+    function login() {
 
         try {
-            if (email.length < 5 && senha.length < 4) {
+            if (email.length < 10 && senha.length < 6) {
                 Alert.alert("Credenciais invalidas");
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
@@ -29,12 +29,6 @@ export default function Login() {
             console.log(erro);
         }
     }
-
-    state = {
-        signedIn: false,
-        name: '',
-        photoUrl: '',
-    };
 
     return (
         <View style={styles.container}>
@@ -67,9 +61,14 @@ export default function Login() {
 
             <TouchableOpacity
                 style={styles.botao}
-                onPress={loginEmailSenha}
-            >
+                onPress={login}>
                 <Text style={styles.botaoText}>Acessar</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.botaoRegister}
+                onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.botaoText}>Registrar</Text>
             </TouchableOpacity>
 
         </View>

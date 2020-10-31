@@ -1,6 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Image, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
@@ -11,7 +10,6 @@ import 'firebase/firestore';
 
 
 export default function Profile() {
-    const navigation = useNavigation();
     const firestore = firebase.firestore();
 
     const [nome, setNome] = useState('');
@@ -20,23 +18,16 @@ export default function Profile() {
     const [dataNasc, setDataNasc] = useState('');
     const [editable, setEditable] = useState(false);
 
-    const user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser.uid;
 
     useEffect(() => {
-        getUser()
-        destrinchador = firestore.collection("passageiro").doc
-            (user.uid).onSnapshot(doc => {
-                setNome(doc.data().nome)
-                setTel(doc.data().telefone)
-                setCpf(doc.data().cpf)
-                setDataNasc(doc.data().dataNasc)
-            })
-
-    });
-
-    getUser = async () => {
-        const userDocument = await firestore.collection("passageiro").doc(user.uid).get();
-    }
+        firestore.collection("passageiro").doc(user).onSnapshot(doc => {
+            setNome(doc.data().nome)
+            setTel(doc.data().telefone)
+            setCpf(doc.data().cpf)
+            setDataNasc(doc.data().dataNasc)
+        })
+    }, [editable]);
 
     return (
         <View style={styles.container}>
@@ -86,7 +77,17 @@ export default function Profile() {
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSalvar}
-                            onPress={() => { setEditable(false) }}>
+                            // update nao funcionando
+                            onPress={() => {
+                                firestore.collection("passageiro").doc(user).update({
+                                    "nome": nome,
+                                    telefone: tel,
+                                    dataNasc: dataNasc,
+                                    cpf: cpf
+                                }).then(resultado => {
+                                    setEditable(false)
+                                })
+                            }}>
                             <Text style={styles.botaoText}>Salvar Edicao</Text>
                         </TouchableOpacity>
                     </Fragment>
