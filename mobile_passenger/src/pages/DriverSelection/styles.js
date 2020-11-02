@@ -34,7 +34,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     textNome: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
     },
     textNota: {
