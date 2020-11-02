@@ -42,7 +42,7 @@ export default class Map extends React.Component {
 
 
         firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).onSnapshot(doc => {
-            if (doc.data().latitudeS != undefined && doc.data().latitudeC != undefined) {
+            if (doc.data().latitudeS != null && doc.data().latitudeC != null) {
                 this.setState({
                     destinationStay: {
                         latitude: doc.data().latitudeS,
@@ -123,9 +123,7 @@ export default class Map extends React.Component {
                         <Marker
                             coordinate={destinationStay}
                             anchor={{ x: 0.6, y: 0.6 }}
-                            image={markerStay}
-                            title={destinationStay.title}
-                            description={"Saindo daqui"}>
+                            image={markerStay}>
                         </Marker>
                     )}
 
@@ -141,9 +139,7 @@ export default class Map extends React.Component {
                             <Marker
                                 coordinate={destinationGoing}
                                 anchor={{ x: 0.6, y: 0.6 }}
-                                image={markerGoing}
-                                title={destinationGoing.title}
-                                description={"Chegando aqui"}>
+                                image={markerGoing}>
                             </Marker>
                         </Fragment>
                     )}

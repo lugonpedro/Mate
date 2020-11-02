@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
+import { View, Image, TouchableOpacity, Text, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
@@ -16,7 +16,7 @@ export default function Login() {
     function loginEmailSenha() {
 
         try {
-            if (email.length < 5 && senha.length < 4) {
+            if (email.length < 10 && senha.length < 6) {
                 Alert.alert("Credenciais invalidas");
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
@@ -28,12 +28,6 @@ export default function Login() {
             console.log(erro);
         }
     }
-
-    state = {
-        signedIn: false,
-        name: '',
-        photoUrl: '',
-    };
 
     return (
         <View style={styles.container}>

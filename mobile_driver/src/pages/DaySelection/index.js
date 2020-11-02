@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
-import Turno from '../../components/Turno';
 import Dias from '../../components/Dias';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -29,7 +28,7 @@ export default function DaySelection() {
                 <Dias />
 
                 <Text style={{ paddingTop: 30, fontSize: 18, fontWeight: 'bold' }}>Selecione o turno</Text>
-                <Turno />
+                
 
                 <TouchableOpacity
                     style={styles.botao}

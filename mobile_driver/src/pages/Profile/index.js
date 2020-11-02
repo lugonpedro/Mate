@@ -1,15 +1,43 @@
 import React, { useState, Fragment } from 'react';
 import { View, TextInput, TouchableOpacity, Image, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
 import logo from '../../../assets/icon.png';
 
-export default function Profile() {
-    const navigation = useNavigation();
+import firebase from 'firebase';
+import 'firebase/firestore';
 
+export default function Profile() {
+    const firestore = firebase.firestore();
+
+    const [nome, setNome] = useState('');
+    const [tel, setTel] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dataNasc, setDataNasc] = useState('');
     const [editable, setEditable] = useState(false);
+
+    const user = firebase.auth().currentUser.uid;
+
+    useEffect(() => {
+        firestore.collection("motorista").doc(user).onSnapshot(doc => {
+            setNome(doc.data().nome)
+            setTel(doc.data().telefone)
+            setCpf(doc.data().cpf)
+            setDataNasc(doc.data().dataNasc)
+        })
+    }, [editable]);
+
+    async function update() {
+        await firestore.collection("motorista").doc(user).update({
+            nome: nome,
+            telefone: tel,
+            dataNasc: dataNasc,
+            cpf: cpf
+        }).then(resultado => {
+            setEditable(false)
+        })
+    }
 
     return (
         <View style={styles.container}>
@@ -58,7 +86,7 @@ export default function Profile() {
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSalvar}
-                            onPress={() => { setEditable(false) }}>
+                            onPress={update}>
                             <Text style={styles.botaoText}>Salvar Edicao</Text>
                         </TouchableOpacity>
                     </Fragment>
