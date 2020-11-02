@@ -20,9 +20,18 @@ export default function Route() {
     }
 
     useEffect(() => {
-        // fazer um if caso o usuario ja seja cadastrado nao fazer o makeUser
-        makeUser()
+        userExists()
     }, [])
+
+    async function userExists() {
+        const userRef = await firestore.collection("passageiro").doc(user).get().then(doc => {
+            if (doc.exists) {
+                
+            } else {
+                makeUser()
+            }
+        });
+    }
 
     async function makeUser() {
         const userDocument = await firestore.collection("passageiro").doc(user).set({
@@ -30,11 +39,13 @@ export default function Route() {
             cpf: "",
             telefone: "",
             dataNasc: "",
-            latitudeC: "",
-            longitudeC: "",
-            latitudeS: "",
-            longitudeS: "",
-            motorista: ""
+            dias: "",
+            turno: "",
+            latitudeC: null,
+            longitudeC: null,
+            latitudeS: null,
+            longitudeS: null,
+            motorista: null
         });
     }
 

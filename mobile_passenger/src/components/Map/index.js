@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { View, Text } from 'react-native';
+import { View, Alert } from 'react-native';
 
 import SearchEsta from '../SearchEsta';
 import SearchVai from '../SearchVai';
@@ -8,6 +8,9 @@ import Directions from '../Directions';
 
 import markerStay from '../../../assets/mstay.png';
 import markerGoing from '../../../assets/mgo.png';
+
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 export default class Map extends React.Component {
 
@@ -36,6 +39,24 @@ export default class Map extends React.Component {
                 maximumAge: 5000,
             }
         )
+
+
+        firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).onSnapshot(doc => {
+            if (doc.data().latitudeS != undefined && doc.data().latitudeC != undefined) {
+                this.setState({
+                    destinationStay: {
+                        latitude: doc.data().latitudeS,
+                        longitude: doc.data().longitudeS
+                    },
+                    destinationGoing: {
+                        latitude: doc.data().latitudeC,
+                        longitude: doc.data().longitudeC
+                    }
+                })
+            } else {
+                
+            }
+        })
     }
 
     handleLocationStaySelected = (data, { geometry }) => {
@@ -47,9 +68,9 @@ export default class Map extends React.Component {
             destinationStay: {
                 latitude,
                 longitude,
-                title: data.structured_formatting.main_text,
             }
         })
+        this.saveLocS();
     }
 
     handleLocationGoingSelected = (data, { geometry }) => {
@@ -61,8 +82,26 @@ export default class Map extends React.Component {
             destinationGoing: {
                 latitude,
                 longitude,
-                title: data.structured_formatting.main_text,
             }
+        })
+        this.saveLocC();
+    }
+
+    saveLocS = async () => {
+        await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
+            latitudeS: this.state.destinationStay.latitude,
+            longitudeS: this.state.destinationStay.longitude,
+        }).then(resultado => {
+
+        })
+    }
+
+    saveLocC = async () => {
+        await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
+            latitudeC: this.state.destinationGoing.latitude,
+            longitudeC: this.state.destinationGoing.longitude,
+        }).then(resultado => {
+
         })
     }
 

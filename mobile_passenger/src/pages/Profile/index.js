@@ -29,6 +29,17 @@ export default function Profile() {
         })
     }, [editable]);
 
+    async function update() {
+        await firestore.collection("passageiro").doc(user).update({
+            nome: nome,
+            telefone: tel,
+            dataNasc: dataNasc,
+            cpf: cpf
+        }).then(resultado => {
+            setEditable(false)
+        })
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -40,6 +51,7 @@ export default function Profile() {
                     style={styles.input}
                     defaultValue={nome}
                     editable={editable}
+                    onChangeText={nome => setNome(nome)}
                 />
 
                 <TextInput placeholder={"Telefone"}
@@ -47,21 +59,27 @@ export default function Profile() {
                     maxLength={11}
                     style={styles.input}
                     defaultValue={tel}
-                    editable={editable} />
+                    editable={editable}
+                    onChangeText={tel => setTel(tel)}
+                />
 
                 <TextInput placeholder={"Data de Nascimento"}
                     keyboardType={'numeric'}
                     maxLength={8}
                     style={styles.input}
                     defaultValue={dataNasc}
-                    editable={editable} />
+                    editable={editable}
+                    onChangeText={dataNasc => setDataNasc(dataNasc)}
+                />
 
                 <TextInput placeholder={"CPF"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
                     defaultValue={cpf}
-                    editable={editable} />
+                    editable={editable}
+                    onChangeText={cpf => setCpf(cpf)}
+                />
 
                 {editable || (
                     <Fragment>
@@ -77,17 +95,7 @@ export default function Profile() {
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSalvar}
-                            // update nao funcionando
-                            onPress={() => {
-                                firestore.collection("passageiro").doc(user).update({
-                                    "nome": nome,
-                                    telefone: tel,
-                                    dataNasc: dataNasc,
-                                    cpf: cpf
-                                }).then(resultado => {
-                                    setEditable(false)
-                                })
-                            }}>
+                            onPress={update}>
                             <Text style={styles.botaoText}>Salvar Edicao</Text>
                         </TouchableOpacity>
                     </Fragment>
