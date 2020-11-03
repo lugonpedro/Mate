@@ -46,7 +46,6 @@ export default function DaySelection() {
                 <Dias />
 
                 <Text style={{ paddingTop: 30, fontSize: 18, fontWeight: 'bold' }}>Selecione o turno</Text>
-                {/* <Turno /> */}
 
                 <Picker
                     selectedValue={turno} onValueChange={turno => setTurno(turno)} mode={"dropdown"}
@@ -63,5 +62,6 @@ export default function DaySelection() {
                 </TouchableOpacity>
             </View>
         </View>
+
     );
 }

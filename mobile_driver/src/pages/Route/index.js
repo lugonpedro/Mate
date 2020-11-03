@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import Map from '../../components/Map';
 import { useNavigation } from '@react-navigation/native';

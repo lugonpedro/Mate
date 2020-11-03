@@ -24,8 +24,8 @@ export default function Login() {
             } else {
                 firebase.auth().createUserWithEmailAndPassword(email, senha).then(resultado => {
                     navigation.goBack()
+                    Alert.alert("Cadastro realizado!")
                 });
-                Alert.alert("Cadastro realizado com sucesso")
             }
         } catch (error) {
             Alert.alert("Erro ao se cadastrar!");

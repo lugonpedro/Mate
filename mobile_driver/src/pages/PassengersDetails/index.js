@@ -22,9 +22,8 @@ export default function PassengersDetails() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros Confirmados</Text>
-                
-                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros Pendentes</Text>
+                <Text style={{ paddingTop: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
+
             </View>
         </View>
     );

@@ -1,8 +1,7 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Image, Text } from 'react-native';
 
 import styles from './styles';
-
 import logo from '../../../assets/icon.png';
 
 import firebase from 'firebase';
@@ -48,29 +47,37 @@ export default function Profile() {
             <View style={styles.main}>
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={nome}
+                    editable={editable} 
+                    onChangeText={nome => setNome(nome)}
+                    />
 
                 <TextInput placeholder={"Telefone"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={tel}
+                    editable={editable}
+                    onChangeText={tel => setTel(tel)}
+                     />
 
                 <TextInput placeholder={"Data de Nascimento"}
                     keyboardType={'numeric'}
                     maxLength={8}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={dataNasc}
+                    editable={editable} 
+                    onChangeText={dataNasc => setDataNasc(dataNasc)}
+                    />
 
                 <TextInput placeholder={"CPF"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={cpf}
+                    editable={editable} 
+                    onChangeText={cpf => setCpf(cpf)}
+                    />
 
                 {editable || (
                     <Fragment>

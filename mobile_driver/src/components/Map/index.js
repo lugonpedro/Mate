@@ -97,7 +97,7 @@ export default class Map extends React.Component {
     }
 
     saveLocS = async () => {
-        await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
+        await firebase.firestore().collection("motorista").doc(firebase.auth().currentUser.uid).update({
             latitudeS: this.state.destinationStay.latitude,
             longitudeS: this.state.destinationStay.longitude,
         }).then(resultado => {
@@ -106,7 +106,7 @@ export default class Map extends React.Component {
     }
 
     saveLocC = async () => {
-        await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
+        await firebase.firestore().collection("motorista").doc(firebase.auth().currentUser.uid).update({
             latitudeC: this.state.destinationGoing.latitude,
             longitudeC: this.state.destinationGoing.longitude,
         }).then(resultado => {

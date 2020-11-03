@@ -8,7 +8,6 @@ import logo from '../../../assets/icon.png';
 import firebase from 'firebase';
 import 'firebase/firestore';
 
-
 export default function Profile() {
     const firestore = firebase.firestore();
 
