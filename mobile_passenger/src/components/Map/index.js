@@ -39,24 +39,33 @@ export default class Map extends React.Component {
                 maximumAge: 5000,
             }
         )
+        this.userExists();
+    }
 
-
-        firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).onSnapshot(doc => {
-            if (doc.data().latitudeS != null && doc.data().latitudeC != null) {
-                this.setState({
-                    destinationStay: {
-                        latitude: doc.data().latitudeS,
-                        longitude: doc.data().longitudeS
-                    },
-                    destinationGoing: {
-                        latitude: doc.data().latitudeC,
-                        longitude: doc.data().longitudeC
-                    }
-                })
+    async userExists() {
+        const userRef = await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).get().then(doc => {
+            if (doc.exists) {
+                if (doc.data().latitudeS != null &&
+                    doc.data().longitudeS != null &&
+                    doc.data().latitudeC != null &&
+                    doc.data().longitudeC != null) {
+                    firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).onSnapshot(doc => {
+                        this.setState({
+                            destinationStay: {
+                                latitude: doc.data().latitudeS,
+                                longitude: doc.data().longitudeS
+                            },
+                            destinationGoing: {
+                                latitude: doc.data().latitudeC,
+                                longitude: doc.data().longitudeC
+                            }
+                        })
+                    })
+                }
             } else {
-                
+
             }
-        })
+        });
     }
 
     handleLocationStaySelected = (data, { geometry }) => {
