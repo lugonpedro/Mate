@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -52,39 +52,42 @@ export default function DriverSelection() {
 
             <View style={styles.main}>
                 <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
-
-                <FlatList style={{ width: '100%' }}
-                    data={list}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
-                                <TouchableOpacity style={{
-                                    height: 100,
-                                    width: 300,
-                                    backgroundColor: 'white',
-                                    borderRadius: 10,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                                    onPressIn={() => {setUid(item.id)}}
-                                    onPress={() => {navigation.navigate('ServiceDetails', {
-                                        uid: uid
-                                    })}}
-                                >
-                                    <Text style={{
-                                        fontSize: 24,
-                                        fontWeight: 'bold',
-                                    }}>{item.nome}</Text>
-                                    <Text>{item.turno}</Text>
-                                    <Text>{item.local}</Text>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold' }}>{item.nota}</Text>
-                                        <FontAwesome name="star" size={18} color={"black"} />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    }} />
+                <SafeAreaView>
+                    <FlatList style={{ flex: 1 }}
+                        data={list}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={{ alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
+                                    <TouchableOpacity style={{
+                                        height: 100,
+                                        width: 300,
+                                        backgroundColor: 'white',
+                                        borderRadius: 10,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                        onPressIn={() => { setUid(item.id) }}
+                                        onPress={() => {
+                                            navigation.navigate('ServiceDetails', {
+                                                uid: uid
+                                            })
+                                        }}
+                                    >
+                                        <Text style={{
+                                            fontSize: 24,
+                                            fontWeight: 'bold',
+                                        }}>{item.nome}</Text>
+                                        <Text>{item.turno}</Text>
+                                        <Text>{item.local}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold' }}>{item.nota}</Text>
+                                            <FontAwesome name="star" size={18} color={"black"} />
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }} />
+                </SafeAreaView>
             </View>
         </View >
     );
