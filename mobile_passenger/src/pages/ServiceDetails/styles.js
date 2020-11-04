@@ -44,7 +44,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     botaoCancelar: {
-        marginTop: 250,
+        marginTop: 200,
         width: 300,
         height: 42,
         backgroundColor: "red",

@@ -22,6 +22,7 @@ export default function ServiceDetails({ route }) {
     const [tel, setTel] = useState('');
     const [local, setLocal] = useState('');
     const [dias, setDias] = useState([]);
+    const [nota, setNota] = useState(0);
 
     const [service, setService] = useState(false);
     const [driver, setDriver] = useState(null);
@@ -32,6 +33,7 @@ export default function ServiceDetails({ route }) {
             setTel(doc.data().telefone)
             setLocal(doc.data().local)
             setDias(doc.data().dias)
+            setNota(doc.data().nota)
         })
     }, [])
 
@@ -52,9 +54,9 @@ export default function ServiceDetails({ route }) {
         await firestore.collection("passageiro").doc(user).update({
             motorista: uid,
         }).then(resultado => {
-            
+
         })
-        navigation.reset({index: 0, routes: [{name: 'Home'}]})
+        navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     }
 
     function areYouSure() {
@@ -79,7 +81,16 @@ export default function ServiceDetails({ route }) {
         }).then(resultado => {
 
         })
-        navigation.reset({index: 0, routes: [{name: 'Home'}]})
+        navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
+    }
+
+    function giveNote(givenNote) {
+        var newNote = (nota + givenNote)/2
+        firestore.collection("motorista").doc(uid).update({
+            nota: newNote,
+        }).then(resultado => {
+            setNota(newNote)
+        })
     }
 
     return (
@@ -132,6 +143,46 @@ export default function ServiceDetails({ route }) {
 
                 {service &&
                     <Fragment>
+                        <View style={{ flexDirection: 'row', padding: 10 }}>
+                            <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1 }}>Nota:</Text>
+                            <TouchableOpacity
+                                style={{ padding: 5 }}
+                                onPress={() => {giveNote(1)}}
+                            >
+                                <FontAwesome name="star" size={24} color="black" />
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5 }}>1</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{ padding: 5 }}
+                                onPress={() => {giveNote(2)}}
+                            >
+                                <FontAwesome name="star" size={24} color="black" />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{ padding: 5 }}
+                                onPress={() => {giveNote(3)}}
+                            >
+                                <FontAwesome name="star" size={24} color="black" />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{ padding: 5 }}
+                                onPress={() => {giveNote(4)}}
+                            >
+                                <FontAwesome name="star" size={24} color="black" />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{ padding: 5 }}
+                                onPress={() => {giveNote(5)}}
+                            >
+                                <FontAwesome name="star" size={24} color="black" />
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5}}>5</Text>
+                            </TouchableOpacity>
+                        </View>
+
                         <TouchableOpacity
                             style={styles.botaoCancelar}
                             onPress={() => { areYouSure() }}>
