@@ -25,4 +25,36 @@ export default StyleSheet.create({
     main: {
         alignItems: 'center',
     },
+    input: {
+        marginTop: 10,
+        padding: 10,
+        width: 300,
+        backgroundColor: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 3,
+    },
+    botaoSolicitar: {
+        marginTop: 250,
+        width: 300,
+        height: 42,
+        backgroundColor: "green",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoCancelar: {
+        marginTop: 200,
+        width: 300,
+        height: 42,
+        backgroundColor: "red",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+    },
 })

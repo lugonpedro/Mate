@@ -1,15 +1,43 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Image, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 
 import logo from '../../../assets/icon.png';
 
-export default function Profile() {
-    const navigation = useNavigation();
+import firebase from 'firebase';
+import 'firebase/firestore';
 
+export default function Profile() {
+    const firestore = firebase.firestore();
+
+    const [nome, setNome] = useState('');
+    const [tel, setTel] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dataNasc, setDataNasc] = useState('');
     const [editable, setEditable] = useState(false);
+
+    const user = firebase.auth().currentUser.uid;
+
+    useEffect(() => {
+        firestore.collection("passageiro").doc(user).onSnapshot(doc => {
+            setNome(doc.data().nome)
+            setTel(doc.data().telefone)
+            setCpf(doc.data().cpf)
+            setDataNasc(doc.data().dataNasc)
+        })
+    }, [editable]);
+
+    function update() {
+        firestore.collection("passageiro").doc(user).update({
+            nome: nome,
+            telefone: tel,
+            dataNasc: dataNasc,
+            cpf: cpf
+        }).then(resultado => {
+            setEditable(false)
+        })
+    }
 
     return (
         <View style={styles.container}>
@@ -20,29 +48,37 @@ export default function Profile() {
             <View style={styles.main}>
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={nome}
+                    editable={editable}
+                    onChangeText={nome => setNome(nome)}
+                />
 
                 <TextInput placeholder={"Telefone"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={tel}
+                    editable={editable}
+                    onChangeText={tel => setTel(tel)}
+                />
 
                 <TextInput placeholder={"Data de Nascimento"}
                     keyboardType={'numeric'}
                     maxLength={8}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={dataNasc}
+                    editable={editable}
+                    onChangeText={dataNasc => setDataNasc(dataNasc)}
+                />
 
                 <TextInput placeholder={"CPF"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
-                    defaultValue={""}
-                    editable={editable} />
+                    defaultValue={cpf}
+                    editable={editable}
+                    onChangeText={cpf => setCpf(cpf)}
+                />
 
                 {editable || (
                     <Fragment>
@@ -58,7 +94,7 @@ export default function Profile() {
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSalvar}
-                            onPress={() => { setEditable(false) }}>
+                            onPress={update}>
                             <Text style={styles.botaoText}>Salvar Edicao</Text>
                         </TouchableOpacity>
                     </Fragment>

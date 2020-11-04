@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Route from './pages/Route';
 import Profile from './pages/Profile';
 import DaySelection from './pages/DaySelection';
@@ -33,6 +34,7 @@ export default function Routes() {
         <NavigationContainer>
             <AppStack.Navigator screenOptions={{headerShown: false}}>
                 <AppStack.Screen name="Login" component={Login} />
+                <AppStack.Screen name="Register" component={Register} />
                 <AppStack.Screen name="Home" component={Home} />
                 <AppStack.Screen name="DaySelection" component={DaySelection} />
                 <AppStack.Screen name="DriverSelection" component={DriverSelection} />

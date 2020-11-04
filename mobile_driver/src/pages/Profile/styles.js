@@ -40,7 +40,7 @@ export default StyleSheet.create({
         borderRadius: 3,
     },
     botaoEditar: {
-        marginTop: 240,
+        marginTop: 200,
         width: 350,
         height: 42,
         backgroundColor: "#326888",
@@ -49,7 +49,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     botaoSalvar: {
-        marginTop: 240,
+        marginTop: 200,
         width: 350,
         height: 42,
         backgroundColor: "#5DC1FB",

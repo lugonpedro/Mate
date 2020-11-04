@@ -1,15 +1,60 @@
-import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, Fragment } from 'react';
+import { View, Image, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function ServiceDetails() {
+import firebase from 'firebase';
+import 'firebase/firestore';
+
+export default function ServiceDetails({ route }) {
     const navigation = useNavigation();
+    const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
         navigation.goBack()
+    }
+
+    const { uid } = route.params;
+    const [nome, setNome] = useState('');
+    const [tel, setTel] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dias, setDias] = useState([]);
+
+    useEffect(() => {
+        firestore.collection("passageiro").doc(uid).onSnapshot(doc => {
+            setNome(doc.data().nome)
+            setTel(doc.data().telefone)
+            setCpf(doc.data().cpf)
+            setDias(doc.data().dias)
+        })
+    }, [])
+
+    function areYouSure() {
+        Alert.alert(
+            'Cuidado',
+            'Tem certeza que deseja cancelar o serviço?',
+            [
+                {
+                    text: 'Não',
+                    onPress: () => { },
+                    style: 'cancel'
+                },
+                { text: 'Sim, cancelar serviço', onPress: () => dropService() }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    async function dropService() {
+        await firestore.collection("passageiro").doc(uid).update({
+            motorista: null,
+        }).then(resultado => {
+
+        })
+        navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     }
 
     return (
@@ -22,7 +67,40 @@ export default function ServiceDetails() {
             </View>
 
             <View style={styles.main}>
-                
+                <TextInput placeholder={"Nome do Passageiro"}
+                    style={styles.input}
+                    defaultValue={nome}
+                    editable={false}
+                />
+
+                <TextInput placeholder={"Telefone"}
+                    style={styles.input}
+                    defaultValue={tel}
+                    editable={false} />
+
+                <TextInput placeholder={"CPF"}
+                    style={styles.input}
+                    defaultValue={cpf}
+                    editable={false} />
+
+                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingTop: 10 }}>Dias de Trabalho</Text>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    padding: 10,
+                }}>
+                    {dias.map((item, key) => (
+                        <Button key={key} title={item} color={'black'}>
+                        </Button>)
+                    )}
+                </View>
+
+                <TouchableOpacity
+                    style={styles.botaoCancelar}
+                    onPress={() => { areYouSure() }}>
+                    <Text style={styles.botaoText}>Cancelar Serviço</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     );

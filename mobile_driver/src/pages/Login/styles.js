@@ -35,19 +35,13 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    botaoForgotPass: {
+    botaoRegister: {
         width: 300,
         height: 42,
         backgroundColor: "#377294",
-        marginTop: 10,
+        top: 100,
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 100,
-    },
-    botoes: {
-        marginTop: 100,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
     },
 })

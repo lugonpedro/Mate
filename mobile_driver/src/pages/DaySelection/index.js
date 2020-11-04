@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
-import Turno from '../../components/Turno';
 import Dias from '../../components/Dias';
+import { Picker } from '@react-native-community/picker';
+
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+import firebase from 'firebase';
+import 'firebase/firestore';
+
 export default function DaySelection() {
+    const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser.uid;
+
+    const [turno, setTurno] = useState("Manha");
+
     const navigation = useNavigation();
 
     function navigateBack() {
         navigation.goBack()
+    }
+
+    async function save() {
+        await firestore.collection("motorista").doc(user).update({
+            turno: turno,
+        }).then(resultado => {
+            navigation.navigate('PassengersDetails')
+        })
     }
 
     return (
@@ -29,11 +46,18 @@ export default function DaySelection() {
                 <Dias />
 
                 <Text style={{ paddingTop: 30, fontSize: 18, fontWeight: 'bold' }}>Selecione o turno</Text>
-                <Turno />
+                
+                <Picker
+                    selectedValue={turno} onValueChange={turno => setTurno(turno)} mode={"dropdown"}
+                    style={{ height: 50, width: 150, alignItems: 'center', justifyContent: 'center' }}>
+                    <Picker.Item label="Matutino" value="Manha" />
+                    <Picker.Item label="Vespertino" value="Tarde" />
+                    <Picker.Item label="Noturno" value="Noite" />
+                </Picker>
 
                 <TouchableOpacity
                     style={styles.botao}
-                    onPress={() => navigation.navigate('PassengersDetails')}>
+                    onPress={save}>
                     <Text style={styles.botaoText}>Ver Passageiros</Text>
                 </TouchableOpacity>
             </View>

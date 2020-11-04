@@ -1,29 +1,16 @@
 import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#4A99C7',
-        paddingTop: Constants.statusBarHeight,
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
-        paddingHorizontal: 20,
-        height: 60,
-        paddingTop: 2,
-        elevation: 10,
+        backgroundColor: '#4A99C7',
     },
     logo: {
+        width: 300,
+        height: 100,
         left: 10,
-        width: 70,
-        height: 120,
-    },
-    main: {
-        alignItems: 'center',
     },
     input: {
         marginTop: 10,
@@ -34,11 +21,11 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         borderRadius: 3,
     },
-    botaoCancelar: {
-        marginTop: 240,
+    botao: {
         width: 300,
         height: 42,
-        backgroundColor: "red",
+        backgroundColor: "#377294",
+        marginTop: 10,
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
@@ -48,4 +35,18 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
+    botaoVoltar: {
+        width: 300,
+        height: 42,
+        backgroundColor: "#377294",
+        top: 100,
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    olho: {
+        position: 'absolute',
+        right: 70,
+        top: 365,
+    }
 })
