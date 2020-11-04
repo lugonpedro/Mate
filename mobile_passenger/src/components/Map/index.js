@@ -42,8 +42,8 @@ export default class Map extends React.Component {
         this.userExists();
     }
 
-    async userExists() {
-        const userRef = await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).get().then(doc => {
+    userExists() {
+        firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).get().then(doc => {
             if (doc.exists) {
                 if (doc.data().latitudeS != null &&
                     doc.data().longitudeS != null &&
@@ -62,8 +62,6 @@ export default class Map extends React.Component {
                         })
                     })
                 }
-            } else {
-
             }
         });
     }

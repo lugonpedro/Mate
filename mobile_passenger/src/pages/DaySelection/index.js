@@ -23,8 +23,8 @@ export default function DaySelection() {
         navigation.goBack()
     }
 
-    async function save() {
-        await firestore.collection("passageiro").doc(user).update({
+    function save() {
+        firestore.collection("passageiro").doc(user).update({
             turno: turno,
         }).then(resultado => {
             navigation.navigate('DriverSelection')

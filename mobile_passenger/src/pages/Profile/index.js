@@ -28,8 +28,8 @@ export default function Profile() {
         })
     }, [editable]);
 
-    async function update() {
-        await firestore.collection("passageiro").doc(user).update({
+    function update() {
+        firestore.collection("passageiro").doc(user).update({
             nome: nome,
             telefone: tel,
             dataNasc: dataNasc,

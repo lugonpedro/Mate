@@ -32,18 +32,19 @@ export default function ServiceDetails({ route }) {
             setTel(doc.data().telefone)
             setLocal(doc.data().local)
             setDias(doc.data().dias)
-        });
-        serviceExists();
-    }, [driver]);
+        })
+    }, [])
 
-    async function serviceExists() {
+    useEffect(() => {
+        serviceExists()
+    }, [driver])
+
+    function serviceExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             setDriver(doc.data().motorista)
         })
-        if(driver != null){
+        if (driver != null) {
             setService(true)
-        }else{
-
         }
     }
 
@@ -51,9 +52,9 @@ export default function ServiceDetails({ route }) {
         await firestore.collection("passageiro").doc(user).update({
             motorista: uid,
         }).then(resultado => {
-            Alert.alert('Serviço solicitado')
-            navigation.goBack()
+            
         })
+        navigation.reset({index: 0, routes: [{name: 'Home'}]})
     }
 
     function areYouSure() {
@@ -61,12 +62,12 @@ export default function ServiceDetails({ route }) {
             'Cuidado',
             'Tem certeza que deseja cancelar o serviço?',
             [
-              {
-                text: 'Não',
-                onPress: () => {},
-                style: 'cancel'
-              },
-              { text: 'Sim, cancelar serviço', onPress: () => dropService() }
+                {
+                    text: 'Não',
+                    onPress: () => { },
+                    style: 'cancel'
+                },
+                { text: 'Sim, cancelar serviço', onPress: () => dropService() }
             ],
             { cancelable: false }
         );
@@ -76,9 +77,9 @@ export default function ServiceDetails({ route }) {
         await firestore.collection("passageiro").doc(user).update({
             motorista: null,
         }).then(resultado => {
-            Alert.alert('Serviço cancelado')
-            navigation.goBack()
+
         })
+        navigation.reset({index: 0, routes: [{name: 'Home'}]})
     }
 
     return (

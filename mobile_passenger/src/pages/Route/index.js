@@ -30,21 +30,24 @@ export default function Route() {
 
     useEffect(() => {
         userExists()
-        serviceExists()
     }, [driver])
 
-    async function userExists() {
-        await firestore.collection("passageiro").doc(user).get().then(doc => {
+    // useEffect(() => {
+    //     serviceExists()
+    // }, [driver])
+
+    function userExists() {
+        firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
-                
+                serviceExists()
             } else {
                 makeUser()
             }
         });
     }
 
-    async function makeUser() {
-        await firestore.collection("passageiro").doc(user).set({
+    function makeUser() {
+        firestore.collection("passageiro").doc(user).set({
             nome: "",
             cpf: "",
             telefone: "",
@@ -59,14 +62,14 @@ export default function Route() {
         });
     }
 
-    async function serviceExists() {
+    function serviceExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             setDriver(doc.data().motorista)
         })
-        if(driver != null){
-            setService(true)
-        }else{
+        if (driver == null) {
 
+        } else {
+            setService(true)
         }
     }
 
