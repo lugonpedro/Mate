@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, Text, TextInput } from 'react-native';
+import { View, Image, TouchableOpacity, Text, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 
 export default function Login() {
+    
     const navigation = useNavigation();
 
     const [email, setEmail] = useState();

@@ -47,7 +47,6 @@ export default function Route() {
             longitudeC: null,
             latitudeS: null,
             longitudeS: null,
-            passageiros: null
         });
     }
 
