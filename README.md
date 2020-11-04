@@ -14,7 +14,7 @@ São dois aplicativos feitos em react native que se conversam pelo firebase
 
 ## Prints das Telas de Passageiro
 ### Login
-![alt text](https://imgur.com/NeOCFF0)
+![alt text](https://i.imgur.com/NeOCFF0.png)
 
 ### Cadastro
 ![alt text](https://imgur.com/Up9mKwP)
