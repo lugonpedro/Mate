@@ -13,5 +13,5 @@ São dois aplicativos feitos em react native que se conversam pelo firebase
 - Execute `npm start` **(dentro da pasta passenger ou driver)** e o app ira rodar
 
 ## Prints das Telas de Passageiro
-![screenshot-2020-11-04_19 42 49 64](https://resizeimage.net/viewimg/xRKeEHF4xg5xP8h0/KqPg4/screenshot-2020-11-04_19-42-49.png)
+![screenshot-2020-11-04_19 42 49 64](https://resizeimage.net/mypic/xRKeEHF4xg5xP8h0/KqPg4/screenshot-2020-11-04_19-42-49.png)
 
