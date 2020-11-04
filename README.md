@@ -14,22 +14,22 @@ São dois aplicativos feitos em react native que se conversam pelo firebase
 
 ## Prints das Telas de Passageiro
 ### Login
-![alt text](https://i.imgur.com/NeOCFF0.png?cropZoom=100,100)
+![]()
 
 ### Cadastro
-![alt text](https://imgur.com/Up9mKwP)
+![]()
 
 ### Tela Principal (Rota)
-![alt text](https://imgur.com/dkh7tGa)
+![]()
 
 ### Perfil
-![alt text](https://imgur.com/k29WaO0)
+![]()
 
 ### Seleção de Dias e Turno
-![alt text](https://imgur.com/6Pc7AZr)
+![]()
 
 ### Seleção de Motorista
-![alt text](https://imgur.com/7RZx01N)
+![]()
 
 ### Detalhes do Serviço
-![alt text](https://imgur.com/dTpXcrl)
+![]()
