@@ -14,6 +14,7 @@ export default function Profile() {
     const [tel, setTel] = useState('');
     const [cpf, setCpf] = useState('');
     const [dataNasc, setDataNasc] = useState('');
+    const [local, setLocal] = useState('');
     const [editable, setEditable] = useState(false);
 
     const user = firebase.auth().currentUser.uid;
@@ -24,6 +25,7 @@ export default function Profile() {
             setTel(doc.data().telefone)
             setCpf(doc.data().cpf)
             setDataNasc(doc.data().dataNasc)
+            setLocal(doc.data().local)
         })
     }, [editable]);
 
@@ -32,7 +34,8 @@ export default function Profile() {
             nome: nome,
             telefone: tel,
             dataNasc: dataNasc,
-            cpf: cpf
+            cpf: cpf,
+            local: local
         }).then(resultado => {
             setEditable(false)
         })
@@ -48,9 +51,9 @@ export default function Profile() {
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
                     defaultValue={nome}
-                    editable={editable} 
+                    editable={editable}
                     onChangeText={nome => setNome(nome)}
-                    />
+                />
 
                 <TextInput placeholder={"Telefone"}
                     keyboardType={'numeric'}
@@ -59,25 +62,32 @@ export default function Profile() {
                     defaultValue={tel}
                     editable={editable}
                     onChangeText={tel => setTel(tel)}
-                     />
+                />
 
                 <TextInput placeholder={"Data de Nascimento"}
                     keyboardType={'numeric'}
                     maxLength={8}
                     style={styles.input}
                     defaultValue={dataNasc}
-                    editable={editable} 
+                    editable={editable}
                     onChangeText={dataNasc => setDataNasc(dataNasc)}
-                    />
+                />
 
                 <TextInput placeholder={"CPF"}
                     keyboardType={'numeric'}
                     maxLength={11}
                     style={styles.input}
                     defaultValue={cpf}
-                    editable={editable} 
+                    editable={editable}
                     onChangeText={cpf => setCpf(cpf)}
-                    />
+                />
+
+                <TextInput placeholder={"Local de Trabalho"}
+                    style={styles.input}
+                    defaultValue={local}
+                    editable={editable}
+                    onChangeText={local => setLocal(local)}
+                />
 
                 {editable || (
                     <Fragment>

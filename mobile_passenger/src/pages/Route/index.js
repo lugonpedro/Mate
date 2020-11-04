@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import Map from '../../components/Map';
 import { useNavigation } from '@react-navigation/native';
@@ -15,16 +15,26 @@ export default function Route() {
 
     const user = firebase.auth().currentUser.uid;
 
+    const [service, setService] = useState(false);
+    const [driver, setDriver] = useState(null);
+
     function goToDaySelection() {
         navigation.navigate('DaySelection')
     }
 
+    function goToDriver() {
+        navigation.navigate('ServiceDetails', {
+            uid: driver,
+        })
+    }
+
     useEffect(() => {
         userExists()
-    }, [])
+        serviceExists()
+    }, [driver])
 
     async function userExists() {
-        const userRef = await firestore.collection("passageiro").doc(user).get().then(doc => {
+        await firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
                 
             } else {
@@ -34,7 +44,7 @@ export default function Route() {
     }
 
     async function makeUser() {
-        const userDocument = await firestore.collection("passageiro").doc(user).set({
+        await firestore.collection("passageiro").doc(user).set({
             nome: "",
             cpf: "",
             telefone: "",
@@ -49,6 +59,17 @@ export default function Route() {
         });
     }
 
+    async function serviceExists() {
+        firestore.collection("passageiro").doc(user).get().then(doc => {
+            setDriver(doc.data().motorista)
+        })
+        if(driver != null){
+            setService(true)
+        }else{
+
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -57,11 +78,28 @@ export default function Route() {
 
             <View>
                 <Map />
-                <TouchableOpacity
-                    style={styles.botao}
-                    onPress={goToDaySelection}>
-                    <Text style={styles.botaoText}>Escolher Dia e Turno</Text>
-                </TouchableOpacity>
+
+                {service ||
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botao}
+                            onPress={goToDaySelection}>
+                            <Text style={styles.botaoText}>Escolher Dia e Turno</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+                {service &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botao}
+                            onPress={goToDriver}>
+                            <Text style={styles.botaoText}>Ver Motorista</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+
             </View>
         </View>
     );
