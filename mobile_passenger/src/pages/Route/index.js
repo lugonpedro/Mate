@@ -18,8 +18,8 @@ export default function Route() {
     const [service, setService] = useState(false);
     const [driver, setDriver] = useState(null);
 
-    function goToDaySelection() {
-        navigation.navigate('DaySelection')
+    function goToDrivers() {
+        navigation.navigate('DriverSelection')
     }
 
     function goToDriver() {
@@ -85,9 +85,9 @@ export default function Route() {
                 {service ||
                     <Fragment>
                         <TouchableOpacity
-                            style={styles.botao}
-                            onPress={goToDaySelection}>
-                            <Text style={styles.botaoText}>Escolher Dia e Turno</Text>
+                            style={styles.botaoDrivers}
+                            onPress={goToDrivers}>
+                            <Text style={styles.botaoText}>Ver Motoristas</Text>
                         </TouchableOpacity>
                     </Fragment>
                 }
@@ -95,7 +95,7 @@ export default function Route() {
                 {service &&
                     <Fragment>
                         <TouchableOpacity
-                            style={styles.botao}
+                            style={styles.botaoDriver}
                             onPress={goToDriver}>
                             <Text style={styles.botaoText}>Ver Motorista</Text>
                         </TouchableOpacity>

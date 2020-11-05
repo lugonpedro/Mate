@@ -50,8 +50,8 @@ export default function ServiceDetails({ route }) {
         }
     }
 
-    async function getService() {
-        await firestore.collection("passageiro").doc(user).update({
+    function getService() {
+        firestore.collection("passageiro").doc(user).update({
             motorista: uid,
         }).then(resultado => {
 
@@ -75,8 +75,8 @@ export default function ServiceDetails({ route }) {
         );
     }
 
-    async function dropService() {
-        await firestore.collection("passageiro").doc(user).update({
+    function dropService() {
+        firestore.collection("passageiro").doc(user).update({
             motorista: null,
         }).then(resultado => {
 
@@ -85,7 +85,7 @@ export default function ServiceDetails({ route }) {
     }
 
     function giveNote(givenNote) {
-        var newNote = (nota + givenNote)/2
+        var newNote = (nota + givenNote) / 2
         firestore.collection("motorista").doc(uid).update({
             nota: newNote,
         }).then(resultado => {
@@ -147,7 +147,7 @@ export default function ServiceDetails({ route }) {
                             <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1 }}>Nota:</Text>
                             <TouchableOpacity
                                 style={{ padding: 5 }}
-                                onPress={() => {giveNote(1)}}
+                                onPress={() => { giveNote(1) }}
                             >
                                 <FontAwesome name="star" size={24} color="black" />
                                 <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5 }}>1</Text>
@@ -155,31 +155,31 @@ export default function ServiceDetails({ route }) {
 
                             <TouchableOpacity
                                 style={{ padding: 5 }}
-                                onPress={() => {giveNote(2)}}
+                                onPress={() => { giveNote(2) }}
                             >
                                 <FontAwesome name="star" size={24} color="black" />
                             </TouchableOpacity>
 
                             <TouchableOpacity
                                 style={{ padding: 5 }}
-                                onPress={() => {giveNote(3)}}
+                                onPress={() => { giveNote(3) }}
                             >
                                 <FontAwesome name="star" size={24} color="black" />
                             </TouchableOpacity>
 
                             <TouchableOpacity
                                 style={{ padding: 5 }}
-                                onPress={() => {giveNote(4)}}
+                                onPress={() => { giveNote(4) }}
                             >
                                 <FontAwesome name="star" size={24} color="black" />
                             </TouchableOpacity>
 
                             <TouchableOpacity
                                 style={{ padding: 5 }}
-                                onPress={() => {giveNote(5)}}
+                                onPress={() => { giveNote(5) }}
                             >
                                 <FontAwesome name="star" size={24} color="black" />
-                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5}}>5</Text>
+                                <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5 }}>5</Text>
                             </TouchableOpacity>
                         </View>
 

@@ -49,11 +49,11 @@ export default class Dias extends React.Component {
         this.saveDias();
     }
 
-    saveDias = async () => {
-        await firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
+    saveDias = () => {
+        firebase.firestore().collection("passageiro").doc(firebase.auth().currentUser.uid).update({
             dias: this.state.selectedItem,
         }).then(resultado => {
-
+            
         })
     }
 

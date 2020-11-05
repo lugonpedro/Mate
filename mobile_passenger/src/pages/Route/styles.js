@@ -25,7 +25,18 @@ export default StyleSheet.create({
         width: 70,
         height: 120,
     },
-    botao: {
+    botaoDrivers: {
+        position: 'absolute',
+        marginTop: 480,
+        marginLeft: 30,
+        width: 350,
+        height: 42,
+        backgroundColor: "#5DC1FB",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botaoDriver: {
         position: 'absolute',
         marginTop: 480,
         marginLeft: 30,
