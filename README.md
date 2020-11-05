@@ -1,12 +1,11 @@
 # Mate
 
-## Prints
-![Login](https://user-images.githubusercontent.com/39389740/98179764-4985a380-1ede-11eb-8d47-93f34a0ca5b8.png)
-![Rota](https://user-images.githubusercontent.com/39389740/98179953-b39e4880-1ede-11eb-8235-6ddf28f92057.png)
-![Perfil](https://user-images.githubusercontent.com/39389740/98180069-f95b1100-1ede-11eb-98ed-2837ff82ad01.png)
-![Seleção de Dias e Turno](https://user-images.githubusercontent.com/39389740/98179949-b26d1b80-1ede-11eb-8667-6e642d81b913.png)
-![Seleção de Motorista](https://user-images.githubusercontent.com/39389740/98179948-b26d1b80-1ede-11eb-989c-a33e6823fee9.png)
-![Detalhes do Serviço](https://user-images.githubusercontent.com/39389740/98179946-b13bee80-1ede-11eb-9ec9-20e235207b28.png)
+# Prints
+## Passageiro
+![Webp net-resizeimage (1)](https://user-images.githubusercontent.com/39389740/98268325-2523d880-1f6b-11eb-995b-30799cfc5cb1.png)
+![Webp net-resizeimage (2)](https://user-images.githubusercontent.com/39389740/98268324-248b4200-1f6b-11eb-8c99-ab356c67206c.png)
+![Webp net-resizeimage (3)](https://user-images.githubusercontent.com/39389740/98268320-248b4200-1f6b-11eb-99d3-3a3474877678.png)
+![Webp net-resizeimage (4)](https://user-images.githubusercontent.com/39389740/98268318-235a1500-1f6b-11eb-974a-60d89df7cd20.png)
 
 ## Para que serve?
 Projeto de TCC pensado com intuito de facilitar o encontro de pessoas que procuram por serviços de onibus/van escolar e seus devidos motoristas
