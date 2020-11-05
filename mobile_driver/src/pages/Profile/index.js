@@ -1,5 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { View, TextInput, TouchableOpacity, Image, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, Text, Button } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+import Dias from '../../components/Dias';
 
 import styles from './styles';
 import logo from '../../../assets/icon.png';
@@ -15,6 +17,8 @@ export default function Profile() {
     const [cpf, setCpf] = useState('');
     const [dataNasc, setDataNasc] = useState('');
     const [local, setLocal] = useState('');
+    const [dias, setDias] = useState([]);
+    const [turno, setTurno] = useState('');
     const [editable, setEditable] = useState(false);
 
     const user = firebase.auth().currentUser.uid;
@@ -26,16 +30,19 @@ export default function Profile() {
             setCpf(doc.data().cpf)
             setDataNasc(doc.data().dataNasc)
             setLocal(doc.data().local)
+            setDias(doc.data().dias)
+            setTurno(doc.data().turno)
         })
     }, [editable]);
 
-    async function update() {
-        await firestore.collection("motorista").doc(user).update({
+    function update() {
+        firestore.collection("motorista").doc(user).update({
             nome: nome,
             telefone: tel,
             dataNasc: dataNasc,
             cpf: cpf,
-            local: local
+            local: local,
+            turno: turno
         }).then(resultado => {
             setEditable(false)
         })
@@ -88,6 +95,38 @@ export default function Profile() {
                     editable={editable}
                     onChangeText={local => setLocal(local)}
                 />
+
+                <Text style={{ paddingTop: 10, fontSize: 18, fontWeight: 'bold' }}>Dias e Turno</Text>
+
+                {editable || (
+                    <Fragment>
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            padding: 10,
+                        }}>
+                            {dias.map((item, key) => (
+                                <Button key={key} title={item} color={'black'}>
+                                </Button>)
+                            )}
+                        </View>
+                    </Fragment>
+                )}
+
+                {editable && (
+                    <Fragment>
+                        <Dias />
+                    </Fragment>
+                )}
+
+                <Picker
+                    enabled={editable}
+                    selectedValue={turno} onValueChange={turno => setTurno(turno)} mode={"dropdown"}
+                    style={{ height: 50, width: 150, alignItems: 'center', justifyContent: 'center' }}>
+                    <Picker.Item label="Matutino" value="Manha" />
+                    <Picker.Item label="Vespertino" value="Tarde" />
+                    <Picker.Item label="Noturno" value="Noite" />
+                </Picker>
 
                 {editable || (
                     <Fragment>

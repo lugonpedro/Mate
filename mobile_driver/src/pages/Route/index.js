@@ -15,8 +15,8 @@ export default function Route() {
 
     const user = firebase.auth().currentUser.uid;
 
-    function goToDaySelection() {
-        navigation.navigate('DaySelection')
+    function goToPassengers() {
+        navigation.navigate('PassengersDetails')
     }
 
     useEffect(() => {
@@ -60,8 +60,8 @@ export default function Route() {
                 <Map />
                 <TouchableOpacity
                     style={styles.botao}
-                    onPress={goToDaySelection}>
-                    <Text style={styles.botaoText}>Escolher Dia e Turno</Text>
+                    onPress={goToPassengers}>
+                    <Text style={styles.botaoText}>Ver Passageiros</Text>
                 </TouchableOpacity>
             </View>
         </View>

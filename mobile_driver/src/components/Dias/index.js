@@ -38,9 +38,9 @@ export default class Dias extends React.Component {
         for (let data of renderData) {
             if (data.id == id) {
                 data.selected = (data.selected == null) ? true : !data.selected;
-                if(this.state.selectedItem.includes(data.dia)) {
+                if (this.state.selectedItem.includes(data.dia)) {
                     this.state.selectedItem.splice(data.id, 1)
-                }else{
+                } else {
                     this.state.selectedItem.push(data.dia)
                 }
             }
@@ -49,8 +49,8 @@ export default class Dias extends React.Component {
         this.saveDias();
     }
 
-    saveDias = async () => {
-        await firebase.firestore().collection("motorista").doc(firebase.auth().currentUser.uid).update({
+    saveDias = () => {
+        firebase.firestore().collection("motorista").doc(firebase.auth().currentUser.uid).update({
             dias: this.state.selectedItem,
         }).then(resultado => {
 
@@ -66,8 +66,8 @@ export default class Dias extends React.Component {
                 keyExtractor={item => item.id.toString()}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={{ padding: 2, marginTop: 10 }} 
-                    onPress={() => this.onPressHandler(item.id)}>
+                    <TouchableOpacity style={{ padding: 2, marginTop: 10 }}
+                        onPress={() => this.onPressHandler(item.id)}>
                         <Card
                             style={
                                 item.selected == true

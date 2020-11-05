@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList, SafeAreaView} from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -15,12 +15,6 @@ export default function PassengersDetails() {
 
     function navigateBack() {
         navigation.goBack()
-    }
-
-    function goToDetails() {
-        navigation.navigate('ServiceDetails', {
-            uid: uid,
-        })
     }
 
     const [list, setList] = useState([]);
@@ -54,37 +48,38 @@ export default function PassengersDetails() {
             <View style={styles.main}>
                 <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
 
-                <FlatList style={{ width: '100%' }}
-                    data={list}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
-                                <TouchableOpacity style={{
-                                    height: 100,
-                                    width: 300,
-                                    backgroundColor: 'white',
-                                    borderRadius: 10,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                                    onPressIn={() => { setUid(item.id) }}
-                                    onPress={() => {
-                                        navigation.navigate('ServiceDetails', {
-                                            uid: uid
-                                        })
+                <SafeAreaView>
+                    <FlatList
+                        data={list}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
+                                    <TouchableOpacity style={{
+                                        height: 100,
+                                        width: 300,
+                                        backgroundColor: 'white',
+                                        borderRadius: 10,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
                                     }}
-                                >
-                                    <Text style={{
-                                        fontSize: 24,
-                                        fontWeight: 'bold',
-                                    }}>{item.nome}</Text>
-                                    <Text>{item.turno}</Text>
-                                    <Text>Telefone: {item.tel}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )
-                    }} />
-
+                                        onPressIn={() => { setUid(item.id) }}
+                                        onPress={() => {
+                                            navigation.navigate('ServiceDetails', {
+                                                uid: uid
+                                            })
+                                        }}
+                                    >
+                                        <Text style={{
+                                            fontSize: 24,
+                                            fontWeight: 'bold',
+                                        }}>{item.nome}</Text>
+                                        <Text>{item.turno}</Text>
+                                        <Text>Telefone: {item.tel}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }} />
+                </SafeAreaView>
             </View>
         </View>
     );
