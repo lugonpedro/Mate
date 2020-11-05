@@ -16,12 +16,6 @@ export default function DriverSelection() {
         navigation.goBack()
     }
 
-    function goToDetails() {
-        navigation.navigate('ServiceDetails', {
-            uid: uid,
-        })
-    }
-
     const [list, setList] = useState([]);
     const [uid, setUid] = useState('');
 
@@ -51,8 +45,7 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Por favor, escolha um motorista</Text>
-                <SafeAreaView>
+                <SafeAreaView style={{padding: 10}}>
                     <FlatList
                         data={list}
                         renderItem={({ item }) => {
