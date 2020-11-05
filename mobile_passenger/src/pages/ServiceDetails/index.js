@@ -69,7 +69,7 @@ export default function ServiceDetails({ route }) {
                     onPress: () => { },
                     style: 'cancel'
                 },
-                { text: 'Sim, cancelar serviço', onPress: () => dropService() }
+                { text: 'Sim, cancelar serviço', onPress: () => {dropService()} }
             ],
             { cancelable: false }
         );
