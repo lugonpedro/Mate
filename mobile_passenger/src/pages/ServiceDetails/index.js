@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity, Button, Alert, Linking } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -54,9 +54,8 @@ export default function ServiceDetails({ route }) {
         firestore.collection("passageiro").doc(user).update({
             motorista: uid,
         }).then(resultado => {
-
+            navigateBack()
         })
-        navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     }
 
     function areYouSure() {
@@ -69,7 +68,7 @@ export default function ServiceDetails({ route }) {
                     onPress: () => { },
                     style: 'cancel'
                 },
-                { text: 'Sim, cancelar serviço', onPress: () => {dropService()} }
+                { text: 'Sim, cancelar serviço', onPress: () => dropService() }
             ],
             { cancelable: false }
         );
@@ -79,9 +78,8 @@ export default function ServiceDetails({ route }) {
         firestore.collection("passageiro").doc(user).update({
             motorista: null,
         }).then(resultado => {
-
+            navigateBack()
         })
-        navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     }
 
     function giveNote(givenNote) {
@@ -91,6 +89,10 @@ export default function ServiceDetails({ route }) {
         }).then(resultado => {
             setNota(newNote)
         })
+    }
+
+    function sendWpp() {
+        Linking.openURL(`whatsapp://send?phone=55${tel}&text=""`);
     }
 
     return (
@@ -187,6 +189,12 @@ export default function ServiceDetails({ route }) {
                             style={styles.botaoCancelar}
                             onPress={() => { areYouSure() }}>
                             <Text style={styles.botaoText}>Cancelar Serviço</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.botaoWpp}
+                            onPress={() => { sendWpp() }}>
+                            <Text style={styles.botaoText}>Conversar pelo WhatsApp</Text>
                         </TouchableOpacity>
                     </Fragment>
                 }

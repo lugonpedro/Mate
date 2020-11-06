@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, useCallback } from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import Map from '../../components/Map';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 import logo from '../../../assets/icon.png';
@@ -30,16 +30,21 @@ export default function Route() {
 
     useEffect(() => {
         userExists()
-    }, [driver])
+    }, [])
 
-    // useEffect(() => {
-    //     serviceExists()
-    // }, [driver])
+    useFocusEffect(
+        useCallback(() => {
+            serviceExists()
+            return () => {
+                serviceExists()
+            };
+        }, [driver])
+    );
 
     function userExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
-                serviceExists()
+                
             } else {
                 makeUser()
             }
@@ -67,7 +72,7 @@ export default function Route() {
             setDriver(doc.data().motorista)
         })
         if (driver == null) {
-
+            setService(false)
         } else {
             setService(true)
         }
@@ -101,8 +106,6 @@ export default function Route() {
                         </TouchableOpacity>
                     </Fragment>
                 }
-
-
             </View>
         </View>
     );

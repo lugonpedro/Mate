@@ -35,7 +35,6 @@ export default StyleSheet.create({
         borderRadius: 3,
     },
     botaoSolicitar: {
-        marginTop: 250,
         width: 300,
         height: 42,
         backgroundColor: "green",
@@ -44,7 +43,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     botaoCancelar: {
-        marginTop: 200,
         width: 300,
         height: 42,
         backgroundColor: "red",
@@ -56,5 +54,14 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
+    },
+    botaoWpp: {
+        top: 50,
+        width: 300,
+        height: 42,
+        backgroundColor: "green",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 })

@@ -54,6 +54,28 @@ export default function Profile() {
             </View>
 
             <View style={styles.main}>
+
+                {editable || (
+                    <Fragment>
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            padding: 10,
+                        }}>
+                            {dias.map((item, key) => (
+                                <Button key={key} title={item} color={'black'}>
+                                </Button>)
+                            )}
+                        </View>
+                    </Fragment>
+                )}
+
+                {editable && (
+                    <Fragment>
+                        <Dias />
+                    </Fragment>
+                )}
+
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
                     defaultValue={nome}
@@ -87,29 +109,6 @@ export default function Profile() {
                     editable={editable}
                     onChangeText={cpf => setCpf(cpf)}
                 />
-
-                <Text style={{ paddingTop: 10, fontSize: 18, fontWeight: 'bold' }}>Dias e Turno</Text>
-
-                {editable || (
-                    <Fragment>
-                        <View style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            padding: 10,
-                        }}>
-                            {dias.map((item, key) => (
-                                <Button key={key} title={item} color={'black'}>
-                                </Button>)
-                            )}
-                        </View>
-                    </Fragment>
-                )}
-
-                {editable && (
-                    <Fragment>
-                        <Dias />
-                    </Fragment>
-                )}
 
                 <Picker
                     enabled={editable}
