@@ -45,7 +45,9 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-                <SafeAreaView style={{padding: 10}}>
+                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Motoristas</Text>
+
+                <SafeAreaView style={{ padding: 10 }}>
                     <FlatList
                         data={list}
                         renderItem={({ item }) => {
