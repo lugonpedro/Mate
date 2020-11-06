@@ -8,7 +8,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Route from './pages/Route';
 import Profile from './pages/Profile';
-import DaySelection from './pages/DaySelection';
 import PassengersDetails from './pages/PassengersDetails';
 import ServiceDetails from './pages/ServiceDetails';
 
@@ -36,7 +35,6 @@ export default function Routes() {
                 <AppStack.Screen name="Login" component={Login} />
                 <AppStack.Screen name="Register" component={Register} />
                 <AppStack.Screen name="Home" component={Home} />
-                <AppStack.Screen name="DaySelection" component={DaySelection} />
                 <AppStack.Screen name="PassengersDetails" component={PassengersDetails} />
                 <AppStack.Screen name="ServiceDetails" component={ServiceDetails} />
             </AppStack.Navigator>
