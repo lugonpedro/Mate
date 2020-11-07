@@ -66,6 +66,12 @@ export default function Login() {
             </TouchableOpacity>
 
             <TouchableOpacity
+                style={styles.botao}
+                onPress={() => navigation.navigate('ForgotPass')}>
+                <Text style={styles.botaoText}>Esqueci a Senha</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
                 style={styles.botaoRegister}
                 onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.botaoText}>Registrar</Text>

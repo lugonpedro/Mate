@@ -28,13 +28,9 @@ export default function Route() {
         })
     }
 
-    useEffect(() => {
-        userExists()
-    }, [])
-
     useFocusEffect(
         useCallback(() => {
-            serviceExists()
+            userExists()
             return () => {
                 serviceExists()
             };
@@ -44,7 +40,7 @@ export default function Route() {
     function userExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
-                
+                serviceExists()
             } else {
                 makeUser()
             }
