@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useCallback } from 'react';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
+import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
 import Map from '../../components/Map';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
@@ -15,11 +15,33 @@ export default function Route() {
 
     const user = firebase.auth().currentUser.uid;
 
+    const [nome, setNome] = useState('');
+    const [tel, setTel] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dataNasc, setDataNasc] = useState('');
+    const [turno, setTurno] = useState('');
+    const [latitudeC, setLatC] = useState('');
+    const [latitudeS, setLatS] = useState('');
+
     const [service, setService] = useState(false);
     const [driver, setDriver] = useState(null);
 
     function goToDrivers() {
-        navigation.navigate('DriverSelection')
+        firestore.collection("passageiro").doc(user).onSnapshot(doc => {
+            setNome(doc.data().nome)
+            setCpf(doc.data().cpf)
+            setDataNasc(doc.data().dataNasc)
+            setTel(doc.data().telefone)
+            setTurno(doc.data().turno)
+            setLatC(doc.data().latitudeC)
+            setLatS(doc.data().latitudeS)
+        })
+        if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
+            turno != '' && latitudeC != null && latitudeS != null) {
+                navigation.navigate('DriverSelection')
+        } else {
+            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota")
+        }
     }
 
     function goToDriver() {
