@@ -21,12 +21,17 @@ export default function Login() {
                 Alert.alert("Credenciais invalidas");
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
-                    navigation.navigate('Home')
+                    if(firebase.auth().currentUser.emailVerified){
+                        navigation.navigate('Home')
+                    }
+                    else{
+                        Alert.alert("", "Por favor verifique seu e-mail")
+                    }
                 });
             }
         } catch (error) {
             Alert.alert("Erro ao logar!");
-            console.log(erro);
+            console.log(error);
         }
     }
 
@@ -50,7 +55,6 @@ export default function Login() {
             <TextInput
                 style={styles.input}
                 placeholder="Senha"
-                //keyboardType="visible-password"
                 textContentType="password"
                 autoCapitalize="none"
                 autoCompleteType="password"
