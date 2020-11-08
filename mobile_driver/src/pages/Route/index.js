@@ -54,8 +54,8 @@ export default function Route() {
         });
     }
 
-    async function makeUser() {
-        await firestore.collection("motorista").doc(user).set({
+    function makeUser() {
+        firestore.collection("motorista").doc(user).set({
             nome: "",
             cpf: "",
             telefone: "",
