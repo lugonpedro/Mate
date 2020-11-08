@@ -29,7 +29,7 @@ export default function ServiceDetails({ route }) {
     const [voted, setVoted] = useState(false);
 
     var notaExponencial = nota.toExponential(2)
-    var notaFormatada = notaExponencial.slice(0,4)
+    var notaFormatada = notaExponencial.slice(0, 4)
 
     useEffect(() => {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
@@ -168,26 +168,6 @@ export default function ServiceDetails({ route }) {
                     )}
                 </View>
 
-                {requested == false && confirmed == false &&
-                    <Fragment>
-                        <TouchableOpacity
-                            style={styles.botaoSolicitar}
-                            onPress={() => { makeRequest() }}>
-                            <Text style={styles.botaoText}>Solicitar Serviço</Text>
-                        </TouchableOpacity>
-                    </Fragment>
-                }
-
-                {requested == true && confirmed == false &&
-                    <Fragment>
-                        <TouchableOpacity
-                            style={styles.botaoSolicitado}
-                            onPress={() => { areYouSureCancel() }}>
-                            <Text style={styles.botaoText}>Cancelar Solicitação</Text>
-                        </TouchableOpacity>
-                    </Fragment>
-                }
-
                 {confirmed == true && voted == false &&
                     <Fragment>
                         <View style={{ flexDirection: 'row', padding: 10 }}>
@@ -232,9 +212,29 @@ export default function ServiceDetails({ route }) {
                     </Fragment>
                 }
 
-                {voted == true &&
+                {confirmed == true && voted == true &&
                     <Fragment>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1, paddingRight: 5 }}>Nota: {notaFormatada}</Text>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 10, paddingRight: 5 }}>Nota: {notaFormatada}</Text>
+                    </Fragment>
+                }
+
+                {requested == false && confirmed == false &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoSolicitar}
+                            onPress={() => { makeRequest() }}>
+                            <Text style={styles.botaoText}>Solicitar Serviço</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+                {requested == true && confirmed == false &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoSolicitado}
+                            onPress={() => { areYouSureCancel() }}>
+                            <Text style={styles.botaoText}>Cancelar Solicitação</Text>
+                        </TouchableOpacity>
                     </Fragment>
                 }
 
