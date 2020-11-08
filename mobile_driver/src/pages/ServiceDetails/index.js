@@ -71,7 +71,8 @@ export default function ServiceDetails({ route }) {
 
     function acceptPassenger() {
         firestore.collection("passageiro").doc(uid).update({
-            confirmed: true
+            confirmed: true,
+            requested: false
         }).then(resultado => {
             setConfirmed(true)
         })
@@ -79,7 +80,8 @@ export default function ServiceDetails({ route }) {
 
     function refusePassenger() {
         firestore.collection("passageiro").doc(uid).update({
-            motorista: null
+            motorista: null,
+            requested: false
         }).then(resultado => {
             navigateBack()
         })

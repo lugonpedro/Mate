@@ -51,6 +51,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     botaoCancelar: {
+        top: 15,
         width: 300,
         height: 42,
         backgroundColor: "red",

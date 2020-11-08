@@ -26,7 +26,10 @@ export default function ServiceDetails({ route }) {
 
     const [requested, setRequested] = useState(false);
     const [confirmed, setConfirmed] = useState(false);
-    const [driver, setDriver] = useState(null);
+    const [voted, setVoted] = useState(false);
+
+    var notaExponencial = nota.toExponential(2)
+    var notaFormatada = notaExponencial.slice(0,4)
 
     useEffect(() => {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
@@ -36,39 +39,33 @@ export default function ServiceDetails({ route }) {
             setDias(doc.data().dias)
             setNota(doc.data().nota)
         })
-    }, [])
-
-    useEffect(() => {
         serviceExists()
-    }, [driver, confirmed])
+    }, [requested, confirmed])
 
     function serviceExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
-            setDriver(doc.data().motorista)
+            setRequested(doc.data().requested)
             setConfirmed(doc.data().confirmed)
+            setVoted(doc.data().voted)
         })
-        if (driver != null && confirmed == false) {
-            setRequested(true)
-        }
-        if (driver != null && confirmed == true) {
-            setConfirmed(true)
-        }
     }
 
     function makeRequest() {
         firestore.collection("passageiro").doc(user).update({
             motorista: uid,
+            requested: true
         }).then(resultado => {
+            serviceExists()
             Alert.alert("Serviço solicitado", "Favor aguarde confirmação")
-            setRequested(true)
         })
     }
 
     function cancelRequest() {
         firestore.collection("passageiro").doc(user).update({
             motorista: null,
+            requested: false
         }).then(resultado => {
-            setRequested(false)
+            serviceExists()
         })
     }
 
@@ -120,6 +117,13 @@ export default function ServiceDetails({ route }) {
         }).then(resultado => {
             setNota(newNote)
         })
+
+        firestore.collection("passageiro").doc(user).update({
+            voted: true
+        }).then(resultado => {
+            setVoted(true)
+            Alert.alert("Obrigado pela nota!")
+        })
     }
 
     function sendWpp() {
@@ -164,7 +168,7 @@ export default function ServiceDetails({ route }) {
                     )}
                 </View>
 
-                {requested ||
+                {requested == false && confirmed == false &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSolicitar}
@@ -174,7 +178,7 @@ export default function ServiceDetails({ route }) {
                     </Fragment>
                 }
 
-                {requested &&
+                {requested == true && confirmed == false &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSolicitado}
@@ -184,10 +188,10 @@ export default function ServiceDetails({ route }) {
                     </Fragment>
                 }
 
-                {confirmed &&
+                {confirmed == true && voted == false &&
                     <Fragment>
                         <View style={{ flexDirection: 'row', padding: 10 }}>
-                            <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1 }}>Nota:</Text>
+                            <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1, paddingRight: 5 }}>Nota:</Text>
                             <TouchableOpacity
                                 style={{ padding: 5 }}
                                 onPress={() => { giveNote(1) }}
@@ -225,7 +229,17 @@ export default function ServiceDetails({ route }) {
                                 <Text style={{ fontSize: 18, fontWeight: 'bold', paddingLeft: 5 }}>5</Text>
                             </TouchableOpacity>
                         </View>
+                    </Fragment>
+                }
 
+                {voted == true &&
+                    <Fragment>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1, paddingRight: 5 }}>Nota: {notaFormatada}</Text>
+                    </Fragment>
+                }
+
+                {confirmed == true &&
+                    <Fragment>
                         <TouchableOpacity
                             style={styles.botaoCancelar}
                             onPress={() => { areYouSure() }}>

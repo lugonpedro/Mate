@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback, useEffect } from 'react';
+import React, { useState, Fragment, useCallback } from 'react';
 import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
 import Map from '../../components/Map';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -43,23 +43,19 @@ export default function Route() {
         })
     }
 
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         userExists()
-    //         return () => {
-    //             serviceExists()
-    //         };
-    //     }, [driver, confirmed])
-    // );
-
-    useEffect(() => {
-        userExists()
-    }, [driver, confirmed])
+    useFocusEffect(
+        useCallback(() => {
+            userExists()
+            return () => {
+                userExists()
+            };
+        }, [requested, confirmed])
+    );
 
     function userExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
-                firestore.collection("passageiro").doc(user).get().then(doc => {
+                // firestore.collection("passageiro").doc(user).get().then(doc => {
                     setNome(doc.data().nome)
                     setCpf(doc.data().cpf)
                     setDataNasc(doc.data().dataNasc)
@@ -68,9 +64,9 @@ export default function Route() {
                     setLatC(doc.data().latitudeC)
                     setLatS(doc.data().latitudeS)
                     setDriver(doc.data().motorista)
+                    setRequested(doc.data().requested)
                     setConfirmed(doc.data().confirmed)
-                })
-                serviceExists()
+                // })
             } else {
                 makeUser()
             }
@@ -89,19 +85,11 @@ export default function Route() {
             longitudeC: null,
             latitudeS: null,
             longitudeS: null,
+            requested: false,
             confirmed: false,
-            motorista: null
+            motorista: null,
+            voted: false
         });
-    }
-
-    function serviceExists() {
-        if (driver == null && confirmed == false) {
-            setRequested(false)
-        } if (driver != null && confirmed == false) {
-            setRequested(true)
-        } if (driver != null && confirmed == true) {
-            setConfirmed(true)
-        }
     }
 
     return (
@@ -113,7 +101,7 @@ export default function Route() {
             <View>
                 <Map />
 
-                {requested ||
+                {requested == false && confirmed == false &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoDrivers}
@@ -123,7 +111,7 @@ export default function Route() {
                     </Fragment>
                 }
 
-                {requested &&
+                {requested == true && confirmed == false &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoAwaiting}
@@ -133,7 +121,7 @@ export default function Route() {
                     </Fragment>
                 }
 
-                {confirmed &&
+                {confirmed == true &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoDriver}

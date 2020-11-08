@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Image, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import firebase from 'firebase';
 import 'firebase/firestore';
@@ -21,11 +21,14 @@ export default function PassengersDetails() {
     const [confirmPassengers, setConfirmPassengers] = useState([]);
     const [uid, setUid] = useState('');
 
-    useEffect(() => {
-        getPassengers()
-        getConfirmPassengers()
-    }, [])
-    //passengers nos parenteses
+    useFocusEffect(
+        useCallback(() => {
+            getPassengers()
+            return () => {
+
+            };
+        }, [passengers])
+    );
 
     function getPassengers() {
         firestore.collection("passageiro").where("motorista", "==", user).where("confirmed", "==", true).get().then(querySnapshot => {
@@ -40,9 +43,7 @@ export default function PassengersDetails() {
             })
             setPassengers(listP)
         })
-    }
 
-    function getConfirmPassengers() {
         firestore.collection("passageiro").where("motorista", "==", user).where("confirmed", "==", false).get().then(querySnapshot => {
             var listCP = []
             querySnapshot.forEach(doc => {
@@ -66,7 +67,7 @@ export default function PassengersDetails() {
 
             <View style={styles.main}>
                 <SafeAreaView>
-                <Text style={{ padding: 10, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
+                    <Text style={{ padding: 10, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
                     <FlatList
                         data={passengers}
                         renderItem={({ item }) => {

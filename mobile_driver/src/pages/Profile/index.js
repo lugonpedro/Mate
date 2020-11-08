@@ -80,6 +80,7 @@ export default function Profile() {
 
                 <TextInput placeholder={"Nome Completo"}
                     style={styles.input}
+                    maxLength={24}
                     defaultValue={nome}
                     editable={editable}
                     onChangeText={nome => setNome(nome)}

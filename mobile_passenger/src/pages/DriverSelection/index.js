@@ -11,16 +11,24 @@ import 'firebase/firestore';
 export default function DriverSelection() {
     const navigation = useNavigation();
     const firestore = firebase.firestore();
+    const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
         navigation.goBack()
     }
 
+    const [turno, setTurno] = useState('');
+
     const [list, setList] = useState([]);
     const [uid, setUid] = useState('');
 
     useEffect(() => {
-        firestore.collection("motorista").get().then(querySnapshot => {
+        makeDriversList()
+    }, [turno])
+
+    function makeDriversList() {
+        getPassengerTurn()
+        firestore.collection("motorista").where("turno", "==", turno).get().then(querySnapshot => {
             var li = []
             querySnapshot.forEach(doc => {
                 li.push({
@@ -33,7 +41,13 @@ export default function DriverSelection() {
             })
             setList(li)
         })
-    }, [uid])
+    }
+
+    function getPassengerTurn() {
+        firestore.collection("passageiro").doc(user).get().then(doc => {
+            setTurno(doc.data().turno)
+        })
+    }
 
     return (
         <View style={styles.container}>
@@ -45,7 +59,7 @@ export default function DriverSelection() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Motoristas</Text>
+                <Text style={{ padding: 10, fontSize: 18, fontWeight: 'bold' }}>Motoristas</Text>
 
                 <SafeAreaView style={{ padding: 10 }}>
                     <FlatList
