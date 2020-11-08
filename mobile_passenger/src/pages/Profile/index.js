@@ -136,7 +136,7 @@ export default function Profile() {
                         <TouchableOpacity
                             style={styles.botaoSalvar}
                             onPress={update}>
-                            <Text style={styles.botaoText}>Salvar Edição</Text>
+                            <Text style={styles.botaoText}>Salvar</Text>
                         </TouchableOpacity>
                     </Fragment>
                 )}
