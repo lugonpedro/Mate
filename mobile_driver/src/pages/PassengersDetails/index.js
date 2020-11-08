@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, TouchableOpacity, FlatList, SafeAreaView} from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
 import { FontAwesome } from '@expo/vector-icons';
@@ -17,24 +17,43 @@ export default function PassengersDetails() {
         navigation.goBack()
     }
 
-    const [list, setList] = useState([]);
+    const [passengers, setPassengers] = useState([]);
+    const [confirmPassengers, setConfirmPassengers] = useState([]);
     const [uid, setUid] = useState('');
 
     useEffect(() => {
-        firestore.collection("passageiro").where("motorista", "==", user).get().then(querySnapshot => {
-            var li = []
+        getPassengers()
+        getConfirmPassengers()
+    }, [])
+    //passengers nos parenteses
+
+    function getPassengers() {
+        firestore.collection("passageiro").where("motorista", "==", user).where("confirmed", "==", true).get().then(querySnapshot => {
+            var listP = []
             querySnapshot.forEach(doc => {
-                li.push({
+                listP.push({
                     id: doc.id,
                     nome: doc.data().nome,
                     turno: doc.data().turno,
                     tel: doc.data().telefone,
-                    nota: doc.data().nota
                 })
             })
-            setList(li)
+            setPassengers(listP)
         })
-    }, [uid])
+    }
+
+    function getConfirmPassengers() {
+        firestore.collection("passageiro").where("motorista", "==", user).where("confirmed", "==", false).get().then(querySnapshot => {
+            var listCP = []
+            querySnapshot.forEach(doc => {
+                listCP.push({
+                    id: doc.id,
+                    nome: doc.data().nome,
+                })
+            })
+            setConfirmPassengers(listCP)
+        })
+    }
 
     return (
         <View style={styles.container}>
@@ -46,11 +65,10 @@ export default function PassengersDetails() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
-
                 <SafeAreaView>
+                <Text style={{ padding: 10, fontSize: 18, fontWeight: 'bold' }}>Passageiros</Text>
                     <FlatList
-                        data={list}
+                        data={passengers}
                         renderItem={({ item }) => {
                             return (
                                 <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
@@ -75,6 +93,36 @@ export default function PassengersDetails() {
                                         }}>{item.nome}</Text>
                                         <Text>{item.turno}</Text>
                                         <Text>Telefone: {item.tel}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }} />
+
+                    <Text style={{ padding: 10, fontSize: 18, fontWeight: 'bold' }}>Sem Confirmação</Text>
+
+                    <FlatList
+                        data={confirmPassengers}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', padding: 3 }}>
+                                    <TouchableOpacity style={{
+                                        height: 50,
+                                        width: 300,
+                                        backgroundColor: 'white',
+                                        borderRadius: 10,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                        onPressIn={() => { setUid(item.id) }}
+                                        onPress={() => {
+                                            navigation.navigate('ServiceDetails', {
+                                                uid: uid
+                                            })
+                                        }}
+                                    >
+                                        <Text style={{
+                                            fontSize: 18,
+                                        }}>{item.nome}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )

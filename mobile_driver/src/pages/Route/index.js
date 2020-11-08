@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
 import Map from '../../components/Map';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,18 +15,39 @@ export default function Route() {
 
     const user = firebase.auth().currentUser.uid;
 
+    const [nome, setNome] = useState('');
+    const [tel, setTel] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [dataNasc, setDataNasc] = useState('');
+    const [turno, setTurno] = useState('');
+    const [latitudeC, setLatC] = useState('');
+    const [latitudeS, setLatS] = useState('');
+
     function goToPassengers() {
-        navigation.navigate('PassengersDetails')
+        if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
+            turno != '' && latitudeC != null && latitudeS != null) {
+            navigation.navigate('PassengersDetails')
+        } else {
+            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota")
+        }
     }
 
     useEffect(() => {
         userExists()
     }, [])
 
-    async function userExists() {
-        const userRef = await firestore.collection("motorista").doc(user).get().then(doc => {
+    function userExists() {
+        firestore.collection("motorista").doc(user).get().then(doc => {
             if (doc.exists) {
-                
+                firestore.collection("motorista").doc(user).onSnapshot(doc => {
+                    setNome(doc.data().nome)
+                    setCpf(doc.data().cpf)
+                    setDataNasc(doc.data().dataNasc)
+                    setTel(doc.data().telefone)
+                    setTurno(doc.data().turno)
+                    setLatC(doc.data().latitudeC)
+                    setLatS(doc.data().latitudeS)
+                })
             } else {
                 makeUser()
             }
@@ -34,7 +55,7 @@ export default function Route() {
     }
 
     async function makeUser() {
-        const userDocument = await firestore.collection("motorista").doc(user).set({
+        await firestore.collection("motorista").doc(user).set({
             nome: "",
             cpf: "",
             telefone: "",

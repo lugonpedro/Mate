@@ -47,6 +47,17 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    botaoAwaiting: {
+        position: 'absolute',
+        marginTop: 480,
+        marginLeft: 30,
+        width: 350,
+        height: 42,
+        backgroundColor: "yellow",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     botaoText: {
         fontSize: 16,
         fontWeight: 'bold',

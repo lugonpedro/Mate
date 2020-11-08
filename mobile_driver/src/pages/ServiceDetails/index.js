@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity, Button, Alert, Linking } from 'react-native';
 import styles from './styles';
 import logo from '../../../assets/icon.png';
@@ -11,7 +11,6 @@ import 'firebase/firestore';
 export default function ServiceDetails({ route }) {
     const navigation = useNavigation();
     const firestore = firebase.firestore();
-    const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
         navigation.goBack()
@@ -22,15 +21,37 @@ export default function ServiceDetails({ route }) {
     const [tel, setTel] = useState('');
     const [cpf, setCpf] = useState('');
     const [dias, setDias] = useState([]);
+    const [confirmed, setConfirmed] = useState(false);
 
     useEffect(() => {
-        firestore.collection("passageiro").doc(uid).onSnapshot(doc => {
+        getPassenger()
+    }, [confirmed])
+
+    function getPassenger() {
+        firestore.collection("passageiro").doc(uid).get().then(doc => {
             setNome(doc.data().nome)
             setTel(doc.data().telefone)
             setCpf(doc.data().cpf)
             setDias(doc.data().dias)
+            setConfirmed(doc.data().confirmed)
         })
-    }, [])
+    }
+
+    function areYouSureRefuse() {
+        Alert.alert(
+            'Cuidado',
+            'Tem certeza que deseja recusar o passageiro?',
+            [
+                {
+                    text: 'Não',
+                    onPress: () => { },
+                    style: 'cancel'
+                },
+                { text: 'Sim, recusar', onPress: () => refusePassenger() }
+            ],
+            { cancelable: false }
+        );
+    }
 
     function areYouSure() {
         Alert.alert(
@@ -48,9 +69,26 @@ export default function ServiceDetails({ route }) {
         );
     }
 
+    function acceptPassenger() {
+        firestore.collection("passageiro").doc(uid).update({
+            confirmed: true
+        }).then(resultado => {
+            setConfirmed(true)
+        })
+    }
+
+    function refusePassenger() {
+        firestore.collection("passageiro").doc(uid).update({
+            motorista: null
+        }).then(resultado => {
+            navigateBack()
+        })
+    }
+
     function dropService() {
         firestore.collection("passageiro").doc(uid).update({
             motorista: null,
+            confirmed: false,
         }).then(resultado => {
             navigateBack()
         })
@@ -98,11 +136,31 @@ export default function ServiceDetails({ route }) {
                     )}
                 </View>
 
-                <TouchableOpacity
-                    style={styles.botaoCancelar}
-                    onPress={() => { areYouSure() }}>
-                    <Text style={styles.botaoText}>Cancelar Serviço</Text>
-                </TouchableOpacity>
+                {confirmed &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoCancelar}
+                            onPress={() => { areYouSure() }}>
+                            <Text style={styles.botaoText}>Cancelar Serviço</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+                {confirmed ||
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoAceitar}
+                            onPress={() => { acceptPassenger() }}>
+                            <Text style={styles.botaoText}>Aceitar Passageiro</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.botaoRecusar}
+                            onPress={() => { areYouSureRefuse() }}>
+                            <Text style={styles.botaoText}>Recusar Passageiro</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
 
                 <TouchableOpacity
                     style={styles.botaoWpp}

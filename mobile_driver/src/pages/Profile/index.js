@@ -55,7 +55,7 @@ export default function Profile() {
             </View>
 
             <View style={styles.main}>
-            <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Perfil</Text>
+                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Perfil</Text>
 
                 {editable || (
                     <Fragment>
@@ -120,9 +120,9 @@ export default function Profile() {
                 />
 
                 <Picker
-                    enabled={editable}
-                    selectedValue={turno} onValueChange={turno => setTurno(turno)} mode={"dropdown"}
+                    enabled={editable} selectedValue={turno} onValueChange={turno => setTurno(turno)} mode={"dropdown"}
                     style={{ height: 50, width: 150, alignItems: 'center', justifyContent: 'center' }}>
+                    <Picker.Item label="Turno" value="" />
                     <Picker.Item label="Matutino" value="Manha" />
                     <Picker.Item label="Vespertino" value="Tarde" />
                     <Picker.Item label="Noturno" value="Noite" />

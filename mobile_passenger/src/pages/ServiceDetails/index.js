@@ -24,7 +24,8 @@ export default function ServiceDetails({ route }) {
     const [dias, setDias] = useState([]);
     const [nota, setNota] = useState(0);
 
-    const [service, setService] = useState(false);
+    const [requested, setRequested] = useState(false);
+    const [confirmed, setConfirmed] = useState(false);
     const [driver, setDriver] = useState(null);
 
     useEffect(() => {
@@ -39,23 +40,52 @@ export default function ServiceDetails({ route }) {
 
     useEffect(() => {
         serviceExists()
-    }, [driver])
+    }, [driver, confirmed])
 
     function serviceExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             setDriver(doc.data().motorista)
+            setConfirmed(doc.data().confirmed)
         })
-        if (driver != null) {
-            setService(true)
+        if (driver != null && confirmed == false) {
+            setRequested(true)
+        }
+        if (driver != null && confirmed == true) {
+            setConfirmed(true)
         }
     }
 
-    function getService() {
+    function makeRequest() {
         firestore.collection("passageiro").doc(user).update({
             motorista: uid,
         }).then(resultado => {
-            navigateBack()
+            Alert.alert("Serviço solicitado", "Favor aguarde confirmação")
+            setRequested(true)
         })
+    }
+
+    function cancelRequest() {
+        firestore.collection("passageiro").doc(user).update({
+            motorista: null,
+        }).then(resultado => {
+            setRequested(false)
+        })
+    }
+
+    function areYouSureCancel() {
+        Alert.alert(
+            'Cuidado',
+            'Tem certeza que deseja cancelar a solicitação?',
+            [
+                {
+                    text: 'Não',
+                    onPress: () => { },
+                    style: 'cancel'
+                },
+                { text: 'Sim, cancelar solicitação', onPress: () => cancelRequest() }
+            ],
+            { cancelable: false }
+        );
     }
 
     function areYouSure() {
@@ -77,6 +107,7 @@ export default function ServiceDetails({ route }) {
     function dropService() {
         firestore.collection("passageiro").doc(user).update({
             motorista: null,
+            confirmed: false
         }).then(resultado => {
             navigateBack()
         })
@@ -133,17 +164,27 @@ export default function ServiceDetails({ route }) {
                     )}
                 </View>
 
-                {service ||
+                {requested ||
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoSolicitar}
-                            onPress={() => { getService() }}>
+                            onPress={() => { makeRequest() }}>
                             <Text style={styles.botaoText}>Solicitar Serviço</Text>
                         </TouchableOpacity>
                     </Fragment>
                 }
 
-                {service &&
+                {requested &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoSolicitado}
+                            onPress={() => { areYouSureCancel() }}>
+                            <Text style={styles.botaoText}>Cancelar Solicitação</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+                {confirmed &&
                     <Fragment>
                         <View style={{ flexDirection: 'row', padding: 10 }}>
                             <Text style={{ fontSize: 22, fontWeight: 'bold', padding: 1 }}>Nota:</Text>
@@ -190,14 +231,14 @@ export default function ServiceDetails({ route }) {
                             onPress={() => { areYouSure() }}>
                             <Text style={styles.botaoText}>Cancelar Serviço</Text>
                         </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={styles.botaoWpp}
-                            onPress={() => { sendWpp() }}>
-                            <Text style={styles.botaoText}>Conversar pelo WhatsApp</Text>
-                        </TouchableOpacity>
                     </Fragment>
                 }
+
+                <TouchableOpacity
+                    style={styles.botaoWpp}
+                    onPress={() => { sendWpp() }}>
+                    <Text style={styles.botaoText}>Conversar pelo WhatsApp</Text>
+                </TouchableOpacity>
 
             </View>
         </View>

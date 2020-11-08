@@ -42,6 +42,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    botaoSolicitado: {
+        width: 300,
+        height: 42,
+        backgroundColor: "yellow",
+        borderRadius: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     botaoCancelar: {
         width: 300,
         height: 42,
@@ -59,7 +67,7 @@ export default StyleSheet.create({
         top: 50,
         width: 300,
         height: 42,
-        backgroundColor: "green",
+        backgroundColor: "#5DC1FB",
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',

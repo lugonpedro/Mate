@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback } from 'react';
+import React, { useState, Fragment, useCallback, useEffect } from 'react';
 import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
 import Map from '../../components/Map';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -23,22 +23,15 @@ export default function Route() {
     const [latitudeC, setLatC] = useState('');
     const [latitudeS, setLatS] = useState('');
 
-    const [service, setService] = useState(false);
+    const [confirmed, setConfirmed] = useState(false);
+    const [requested, setRequested] = useState(false);
+
     const [driver, setDriver] = useState(null);
 
     function goToDrivers() {
-        firestore.collection("passageiro").doc(user).onSnapshot(doc => {
-            setNome(doc.data().nome)
-            setCpf(doc.data().cpf)
-            setDataNasc(doc.data().dataNasc)
-            setTel(doc.data().telefone)
-            setTurno(doc.data().turno)
-            setLatC(doc.data().latitudeC)
-            setLatS(doc.data().latitudeS)
-        })
         if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
             turno != '' && latitudeC != null && latitudeS != null) {
-                navigation.navigate('DriverSelection')
+            navigation.navigate('DriverSelection')
         } else {
             Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota")
         }
@@ -50,18 +43,33 @@ export default function Route() {
         })
     }
 
-    useFocusEffect(
-        useCallback(() => {
-            userExists()
-            return () => {
-                serviceExists()
-            };
-        }, [driver])
-    );
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         userExists()
+    //         return () => {
+    //             serviceExists()
+    //         };
+    //     }, [driver, confirmed])
+    // );
+
+    useEffect(() => {
+        userExists()
+    }, [driver, confirmed])
 
     function userExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
+                firestore.collection("passageiro").doc(user).get().then(doc => {
+                    setNome(doc.data().nome)
+                    setCpf(doc.data().cpf)
+                    setDataNasc(doc.data().dataNasc)
+                    setTel(doc.data().telefone)
+                    setTurno(doc.data().turno)
+                    setLatC(doc.data().latitudeC)
+                    setLatS(doc.data().latitudeS)
+                    setDriver(doc.data().motorista)
+                    setConfirmed(doc.data().confirmed)
+                })
                 serviceExists()
             } else {
                 makeUser()
@@ -81,18 +89,18 @@ export default function Route() {
             longitudeC: null,
             latitudeS: null,
             longitudeS: null,
+            confirmed: false,
             motorista: null
         });
     }
 
     function serviceExists() {
-        firestore.collection("passageiro").doc(user).get().then(doc => {
-            setDriver(doc.data().motorista)
-        })
-        if (driver == null) {
-            setService(false)
-        } else {
-            setService(true)
+        if (driver == null && confirmed == false) {
+            setRequested(false)
+        } if (driver != null && confirmed == false) {
+            setRequested(true)
+        } if (driver != null && confirmed == true) {
+            setConfirmed(true)
         }
     }
 
@@ -105,7 +113,7 @@ export default function Route() {
             <View>
                 <Map />
 
-                {service ||
+                {requested ||
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoDrivers}
@@ -115,7 +123,17 @@ export default function Route() {
                     </Fragment>
                 }
 
-                {service &&
+                {requested &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={styles.botaoAwaiting}
+                            onPress={goToDriver}>
+                            <Text style={styles.botaoText}>Aguardando Confirmação</Text>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
+
+                {confirmed &&
                     <Fragment>
                         <TouchableOpacity
                             style={styles.botaoDriver}
