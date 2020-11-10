@@ -32,6 +32,10 @@ export default function ServiceDetails({ route }) {
     var notaFormatada = notaExponencial.slice(0, 4);
 
     useEffect(() => {
+        serviceExists();
+    }, [requested, confirmed])
+
+    function serviceExists() {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
             setNome(doc.data().nome)
             setTel(doc.data().telefone)
@@ -39,10 +43,7 @@ export default function ServiceDetails({ route }) {
             setDias(doc.data().dias)
             setNota(doc.data().nota)
         })
-        serviceExists();
-    }, [requested, confirmed])
 
-    function serviceExists() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             setRequested(doc.data().requested)
             setConfirmed(doc.data().confirmed)

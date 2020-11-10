@@ -38,9 +38,15 @@ export default function Route() {
     }
 
     function goToDriver() {
-        navigation.navigate('ServiceDetails', {
-            uid: driver,
-        })
+        if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
+            turno != '' && latitudeC != null && latitudeS != null) {
+            navigation.navigate('ServiceDetails', {
+                uid: driver,
+            })
+        } else {
+            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota");
+        }
+
     }
 
     useFocusEffect(
@@ -56,16 +62,16 @@ export default function Route() {
         firestore.collection("passageiro").doc(user).get().then(doc => {
             if (doc.exists) {
                 // firestore.collection("passageiro").doc(user).get().then(doc => {
-                    setNome(doc.data().nome)
-                    setCpf(doc.data().cpf)
-                    setDataNasc(doc.data().dataNasc)
-                    setTel(doc.data().telefone)
-                    setTurno(doc.data().turno)
-                    setLatC(doc.data().latitudeC)
-                    setLatS(doc.data().latitudeS)
-                    setDriver(doc.data().motorista)
-                    setRequested(doc.data().requested)
-                    setConfirmed(doc.data().confirmed)
+                setNome(doc.data().nome)
+                setCpf(doc.data().cpf)
+                setDataNasc(doc.data().dataNasc)
+                setTel(doc.data().telefone)
+                setTurno(doc.data().turno)
+                setLatC(doc.data().latitudeC)
+                setLatS(doc.data().latitudeS)
+                setDriver(doc.data().motorista)
+                setRequested(doc.data().requested)
+                setConfirmed(doc.data().confirmed)
                 // })
             } else {
                 makeUser();

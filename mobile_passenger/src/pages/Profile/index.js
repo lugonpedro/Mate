@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Image, Text, Button } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import Dias from '../../components/Dias';
+import { TextInputMask } from 'react-native-masked-text'
 
 import styles from './styles';
 
@@ -85,31 +86,33 @@ export default function Profile() {
                     onChangeText={nome => setNome(nome)}
                 />
 
-                <TextInput placeholder={"Telefone"}
-                    keyboardType={'numeric'}
-                    maxLength={11}
-                    style={styles.input}
-                    defaultValue={tel}
+                <TextInputMask
+                    placeholder={"Telefone"}
+                    type={'cel-phone'}
+                    options={{ maskType: 'BRL', withDDD: true }}
                     editable={editable}
+                    style={styles.input}
+                    value={tel}
                     onChangeText={tel => setTel(tel)}
                 />
 
-                <TextInput placeholder={"Data de Nascimento"}
-                    keyboardType={'numeric'}
-                    maxLength={8}
-                    style={styles.input}
-                    defaultValue={dataNasc}
+                <TextInputMask
+                    placeholder={"CPF"}
+                    type={'cpf'}
                     editable={editable}
-                    onChangeText={dataNasc => setDataNasc(dataNasc)}
+                    style={styles.input}
+                    value={cpf}
+                    onChangeText={cpf => { setCpf(cpf) }}
                 />
 
-                <TextInput placeholder={"CPF"}
-                    keyboardType={'numeric'}
-                    maxLength={11}
-                    style={styles.input}
-                    defaultValue={cpf}
+                <TextInputMask
+                    placeholder={"Data de Nascimento"}
+                    type={'datetime'}
+                    options={{ format: 'DD/MM/YYYY' }}
                     editable={editable}
-                    onChangeText={cpf => setCpf(cpf)}
+                    style={styles.input}
+                    value={dataNasc}
+                    onChangeText={dataNasc => { setDataNasc(dataNasc) }}
                 />
 
                 <Picker
