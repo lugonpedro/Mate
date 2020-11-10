@@ -14,7 +14,7 @@ export default function ServiceDetails({ route }) {
     const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
-        navigation.goBack()
+        navigation.goBack();
     }
 
     const { uid } = route.params;
@@ -28,8 +28,8 @@ export default function ServiceDetails({ route }) {
     const [confirmed, setConfirmed] = useState(false);
     const [voted, setVoted] = useState(false);
 
-    var notaExponencial = nota.toExponential(2)
-    var notaFormatada = notaExponencial.slice(0, 4)
+    var notaExponencial = nota.toExponential(2);
+    var notaFormatada = notaExponencial.slice(0, 4);
 
     useEffect(() => {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
@@ -39,7 +39,7 @@ export default function ServiceDetails({ route }) {
             setDias(doc.data().dias)
             setNota(doc.data().nota)
         })
-        serviceExists()
+        serviceExists();
     }, [requested, confirmed])
 
     function serviceExists() {
@@ -55,8 +55,8 @@ export default function ServiceDetails({ route }) {
             motorista: uid,
             requested: true
         }).then(resultado => {
-            serviceExists()
-            Alert.alert("Serviço solicitado", "Favor aguarde confirmação")
+            serviceExists();
+            Alert.alert("Serviço solicitado", "Favor aguarde confirmação");
         })
     }
 
@@ -65,7 +65,7 @@ export default function ServiceDetails({ route }) {
             motorista: null,
             requested: false
         }).then(resultado => {
-            serviceExists()
+            serviceExists();
         })
     }
 
@@ -106,7 +106,7 @@ export default function ServiceDetails({ route }) {
             motorista: null,
             confirmed: false
         }).then(resultado => {
-            navigateBack()
+            navigateBack();
         })
     }
 
@@ -115,14 +115,14 @@ export default function ServiceDetails({ route }) {
         firestore.collection("motorista").doc(uid).update({
             nota: newNote,
         }).then(resultado => {
-            setNota(newNote)
+            setNota(newNote);
         })
 
         firestore.collection("passageiro").doc(user).update({
             voted: true
         }).then(resultado => {
-            setVoted(true)
-            Alert.alert("Obrigado pela nota!")
+            setVoted(true);
+            Alert.alert("Obrigado pela nota!");
         })
     }
 

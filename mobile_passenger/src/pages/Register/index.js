@@ -23,9 +23,9 @@ export default function Login() {
                 Alert.alert("Por favor, digite um e-mail valido e uma senha com mais de 6 caracteres");
             } else {
                 firebase.auth().createUserWithEmailAndPassword(email, senha).then(resultado => {
-                    firebase.auth().currentUser.sendEmailVerification()
-                    navigation.goBack()
-                    Alert.alert("Cadastro realizado", "Por favor, confirme sua conta pelo e-mail")
+                    firebase.auth().currentUser.sendEmailVerification();
+                    navigation.goBack();
+                    Alert.alert("Cadastro realizado", "Por favor, confirme sua conta pelo e-mail");
                 });
             }
         } catch (error) {

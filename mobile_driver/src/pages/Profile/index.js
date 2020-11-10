@@ -44,7 +44,7 @@ export default function Profile() {
             local: local,
             turno: turno
         }).then(resultado => {
-            setEditable(false)
+            setEditable(false);
         })
     }
 

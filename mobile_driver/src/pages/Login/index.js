@@ -22,10 +22,10 @@ export default function Login() {
             } else {
                 firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
                     if(firebase.auth().currentUser.emailVerified){
-                        navigation.navigate('Home')
+                        navigation.navigate('Home');
                     }
                     else{
-                        Alert.alert("", "Por favor verifique seu e-mail")
+                        Alert.alert("", "Por favor verifique seu e-mail");
                     }
                 });
             }

@@ -14,7 +14,7 @@ export default function PassengersDetails() {
     const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
-        navigation.goBack()
+        navigation.goBack();
     }
 
     const [passengers, setPassengers] = useState([]);
@@ -41,7 +41,7 @@ export default function PassengersDetails() {
                     tel: doc.data().telefone,
                 })
             })
-            setPassengers(listP)
+            setPassengers(listP);
         })
 
         firestore.collection("passageiro").where("motorista", "==", user).where("confirmed", "==", false).get().then(querySnapshot => {
@@ -52,7 +52,7 @@ export default function PassengersDetails() {
                     nome: doc.data().nome,
                 })
             })
-            setConfirmPassengers(listCP)
+            setConfirmPassengers(listCP);
         })
     }
 

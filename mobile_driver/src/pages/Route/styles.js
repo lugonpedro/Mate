@@ -27,9 +27,9 @@ export default StyleSheet.create({
     },
     botao: {
         position: 'absolute',
-        marginTop: 480,
-        marginLeft: 30,
-        width: 350,
+        bottom: 75,
+        alignSelf: 'center',
+        width: 400,
         height: 42,
         backgroundColor: "#4A99C7",
         borderRadius: 4,

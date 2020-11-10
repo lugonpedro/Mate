@@ -14,7 +14,7 @@ export default function DriverSelection() {
     const user = firebase.auth().currentUser.uid;
 
     function navigateBack() {
-        navigation.goBack()
+        navigation.goBack();
     }
 
     const [turno, setTurno] = useState('');
@@ -23,11 +23,11 @@ export default function DriverSelection() {
     const [uid, setUid] = useState('');
 
     useEffect(() => {
-        makeDriversList()
+        makeDriversList();
     }, [turno])
 
     function makeDriversList() {
-        getPassengerTurn()
+        getPassengerTurn();
         firestore.collection("motorista").where("turno", "==", turno).get().then(querySnapshot => {
             var li = []
             querySnapshot.forEach(doc => {
@@ -39,7 +39,7 @@ export default function DriverSelection() {
                     nota: doc.data().nota
                 })
             })
-            setList(li)
+            setList(li);
         })
     }
 

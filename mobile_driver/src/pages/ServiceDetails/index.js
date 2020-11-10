@@ -13,7 +13,7 @@ export default function ServiceDetails({ route }) {
     const firestore = firebase.firestore();
 
     function navigateBack() {
-        navigation.goBack()
+        navigation.goBack();
     }
 
     const { uid } = route.params;
@@ -24,7 +24,7 @@ export default function ServiceDetails({ route }) {
     const [confirmed, setConfirmed] = useState(false);
 
     useEffect(() => {
-        getPassenger()
+        getPassenger();
     }, [confirmed])
 
     function getPassenger() {
@@ -34,7 +34,7 @@ export default function ServiceDetails({ route }) {
             setCpf(doc.data().cpf)
             setDias(doc.data().dias)
             setConfirmed(doc.data().confirmed)
-        })
+        });
     }
 
     function areYouSureRefuse() {
@@ -74,7 +74,7 @@ export default function ServiceDetails({ route }) {
             confirmed: true,
             requested: false
         }).then(resultado => {
-            setConfirmed(true)
+            setConfirmed(true);
         })
     }
 
@@ -83,7 +83,7 @@ export default function ServiceDetails({ route }) {
             motorista: null,
             requested: false
         }).then(resultado => {
-            navigateBack()
+            navigateBack();
         })
     }
 
@@ -92,7 +92,7 @@ export default function ServiceDetails({ route }) {
             motorista: null,
             confirmed: false,
         }).then(resultado => {
-            navigateBack()
+            navigateBack();
         })
     }
 

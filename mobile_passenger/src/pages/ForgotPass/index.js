@@ -19,8 +19,8 @@ export default function ForgotPass() {
                 Alert.alert("E-mail invalido");
             } else {
                 firebase.auth().sendPasswordResetEmail(email).then(resultado => {
-                    Alert.alert("Redefinir senha enviada pro e-mail!")
-                    navigation.goBack()
+                    Alert.alert("Redefinir senha enviada pro e-mail!");
+                    navigation.goBack();
                 });
             }
         } catch (error) {

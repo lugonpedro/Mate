@@ -38,8 +38,8 @@ export default StyleSheet.create({
     },
     botaoDriver: {
         position: 'absolute',
-        marginTop: 480,
-        marginLeft: 30,
+        bottom: 75,
+        alignSelf: 'center',
         width: 350,
         height: 42,
         backgroundColor: "#4A99C7",

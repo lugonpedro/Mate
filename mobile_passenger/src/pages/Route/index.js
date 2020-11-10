@@ -31,9 +31,9 @@ export default function Route() {
     function goToDrivers() {
         if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
             turno != '' && latitudeC != null && latitudeS != null) {
-            navigation.navigate('DriverSelection')
+            navigation.navigate('DriverSelection');
         } else {
-            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota")
+            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota");
         }
     }
 
@@ -45,9 +45,9 @@ export default function Route() {
 
     useFocusEffect(
         useCallback(() => {
-            userExists()
+            userExists();
             return () => {
-                userExists()
+                userExists();
             };
         }, [requested, confirmed])
     );
@@ -68,7 +68,7 @@ export default function Route() {
                     setConfirmed(doc.data().confirmed)
                 // })
             } else {
-                makeUser()
+                makeUser();
             }
         });
     }

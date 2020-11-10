@@ -26,15 +26,15 @@ export default function Route() {
     function goToPassengers() {
         if (nome != '' && cpf != '' && dataNasc != '' && tel != '' &&
             turno != '' && latitudeC != null && latitudeS != null) {
-            navigation.navigate('PassengersDetails')
+            navigation.navigate('PassengersDetails');
         } else {
-            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota")
+            Alert.alert("Por favor", "Cadastre seu perfil e escolha a rota");
         }
     }
 
     useEffect(() => {
         userExists()
-    }, [])
+    }, []);
 
     function userExists() {
         firestore.collection("motorista").doc(user).get().then(doc => {
@@ -49,7 +49,7 @@ export default function Route() {
                     setLatS(doc.data().latitudeS)
                 })
             } else {
-                makeUser()
+                makeUser();
             }
         });
     }
@@ -79,11 +79,11 @@ export default function Route() {
 
             <View>
                 <Map />
-                <TouchableOpacity
-                    style={styles.botao}
-                    onPress={goToPassengers}>
-                    <Text style={styles.botaoText}>Ver Passageiros</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.botao}
+                        onPress={goToPassengers}>
+                        <Text style={styles.botaoText}>Ver Passageiros</Text>
+                    </TouchableOpacity>
             </View>
         </View>
     );

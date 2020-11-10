@@ -43,7 +43,7 @@ export default function Profile() {
             dataNasc: dataNasc,
             turno: turno
         }).then(resultado => {
-            setEditable(false)
+            setEditable(false);
         })
     }
 
