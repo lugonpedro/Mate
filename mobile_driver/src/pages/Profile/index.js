@@ -20,7 +20,11 @@ export default function Profile() {
     const [local, setLocal] = useState('');
     const [dias, setDias] = useState([]);
     const [turno, setTurno] = useState('');
+    const [nota, setNota] = useState('');
     const [editable, setEditable] = useState(false);
+
+    var notaExponencial = nota.toExponential(2);
+    var notaFormatada = notaExponencial.slice(0, 4);
 
     const user = firebase.auth().currentUser.uid;
 
@@ -33,6 +37,7 @@ export default function Profile() {
             setLocal(doc.data().local)
             setDias(doc.data().dias)
             setTurno(doc.data().turno)
+            setNota(doc.data().nota)
         })
     }, [editable]);
 
@@ -57,6 +62,7 @@ export default function Profile() {
 
             <View style={styles.main}>
                 <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Perfil</Text>
+                <Text style={{ padding: 5, fontSize: 18, fontWeight: 'bold' }}>Nota: {notaFormatada}</Text>
 
                 {editable || (
                     <Fragment>

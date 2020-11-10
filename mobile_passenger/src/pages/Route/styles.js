@@ -27,8 +27,8 @@ export default StyleSheet.create({
     },
     botaoDrivers: {
         position: 'absolute',
-        marginTop: 480,
-        marginLeft: 30,
+        bottom: 75,
+        alignSelf: 'center',
         width: 350,
         height: 42,
         backgroundColor: "#5DC1FB",
@@ -49,8 +49,8 @@ export default StyleSheet.create({
     },
     botaoAwaiting: {
         position: 'absolute',
-        marginTop: 480,
-        marginLeft: 30,
+        bottom: 75,
+        alignSelf: 'center',
         width: 350,
         height: 42,
         backgroundColor: "yellow",

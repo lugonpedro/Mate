@@ -33,7 +33,7 @@ export default function ServiceDetails({ route }) {
 
     useEffect(() => {
         serviceExists();
-    }, [requested, confirmed])
+    }, [requested, confirmed, voted])
 
     function serviceExists() {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
@@ -123,12 +123,12 @@ export default function ServiceDetails({ route }) {
             voted: true
         }).then(resultado => {
             setVoted(true);
-            Alert.alert("Obrigado pela nota!");
+            Alert.alert("Obrigado pelo feedback!");
         })
     }
 
     function sendWpp() {
-        Linking.openURL(`whatsapp://send?phone=55${tel}&text=""`);
+        Linking.openURL(`whatsapp://send?phone=55${tel}&text=`);
     }
 
     return (

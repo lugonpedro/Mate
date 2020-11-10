@@ -97,7 +97,7 @@ export default function ServiceDetails({ route }) {
     }
 
     function sendWpp() {
-        Linking.openURL(`whatsapp://send?phone=55${tel}&text=""`);
+        Linking.openURL(`whatsapp://send?phone=55${tel}&text=`);
     }
 
     return (
