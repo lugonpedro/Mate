@@ -55,7 +55,6 @@ export default function Profile() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Perfil</Text>
 
                 {editable || (
                     <Fragment>

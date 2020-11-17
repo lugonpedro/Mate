@@ -23,9 +23,6 @@ export default function Profile() {
     const [nota, setNota] = useState('');
     const [editable, setEditable] = useState(false);
 
-    var notaExponencial = nota.toExponential(2);
-    var notaFormatada = notaExponencial.slice(0, 4);
-
     const user = firebase.auth().currentUser.uid;
 
     useEffect(() => {
@@ -61,8 +58,7 @@ export default function Profile() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 15, fontSize: 18, fontWeight: 'bold' }}>Perfil</Text>
-                <Text style={{ padding: 5, fontSize: 18, fontWeight: 'bold' }}>Nota: {notaFormatada}</Text>
+                <Text style={{ padding: 5, fontSize: 18, fontWeight: 'bold' }}>Nota: {nota}</Text>
 
                 {editable || (
                     <Fragment>
