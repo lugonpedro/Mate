@@ -33,7 +33,7 @@ export default function ServiceDetails({ route }) {
 
     useEffect(() => {
         serviceExists();
-    }, [requested, confirmed, voted])
+    }, [requested, confirmed, nota])
 
     function serviceExists() {
         firestore.collection("motorista").doc(uid).onSnapshot(doc => {
@@ -113,18 +113,20 @@ export default function ServiceDetails({ route }) {
 
     function giveNote(givenNote) {
         var newNote = (nota + givenNote) / 2
+        
         firestore.collection("motorista").doc(uid).update({
             nota: newNote,
         }).then(resultado => {
-            setNota(newNote);
+            
         })
 
         firestore.collection("passageiro").doc(user).update({
             voted: true
         }).then(resultado => {
-            setVoted(true);
             Alert.alert("Obrigado pelo feedback!");
         })
+
+        setVoted(true)
     }
 
     function sendWpp() {

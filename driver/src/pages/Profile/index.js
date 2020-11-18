@@ -20,7 +20,7 @@ export default function Profile() {
     const [local, setLocal] = useState('');
     const [dias, setDias] = useState([]);
     const [turno, setTurno] = useState('');
-    const [nota, setNota] = useState('');
+    const [nota, setNota] = useState(0);
     const [editable, setEditable] = useState(false);
 
     const user = firebase.auth().currentUser.uid;
@@ -51,6 +51,9 @@ export default function Profile() {
         })
     }
 
+    var notaExponencial = nota.toExponential(2);
+    var notaFormatada = notaExponencial.slice(0, 4);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -58,7 +61,7 @@ export default function Profile() {
             </View>
 
             <View style={styles.main}>
-                <Text style={{ padding: 5, fontSize: 18, fontWeight: 'bold' }}>Nota: {nota}</Text>
+                <Text style={{ padding: 5, fontSize: 18, fontWeight: 'bold' }}>Nota: {notaFormatada}</Text>
 
                 {editable || (
                     <Fragment>

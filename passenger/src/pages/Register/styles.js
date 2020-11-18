@@ -45,8 +45,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     olho: {
-        position: 'absolute',
-        right: 70,
-        top: 365,
+        left: 115,
+        bottom: 35,
     }
 })

@@ -50,6 +50,7 @@ export default function DriverSelection() {
     }
 
     return (
+
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={navigateBack}>
@@ -89,7 +90,7 @@ export default function DriverSelection() {
                                         <Text>{item.turno}</Text>
                                         <Text>{item.local}</Text>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold' }}>{item.nota}</Text>
+                                            <Text style={{ paddingLeft: 240, paddingRight: 5, fontWeight: 'bold' }}>{item.nota.toExponential(2).slice(0,4)}</Text>
                                             <FontAwesome name="star" size={18} color={"black"} />
                                         </View>
                                     </TouchableOpacity>
