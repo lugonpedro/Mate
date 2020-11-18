@@ -11,8 +11,8 @@ São dois aplicativos feitos em react native que se conversam pelo firebase
 ## Como rodar?
 - **É recomendado que você esteja com o node na versao LTS 12.x, caso contrario os apps podem dar erro ao instalar ou rodar**
 - Clonar o repositorio
-- Entrar na pasta de sua escolha `cd mobile_passenger` para *passageiro* ou `cd mobile_driver` para *motorista*
-- Rodar um `npm i` para instalar o node_modules **(necessario fazer em ambas)**
+- Entrar na pasta de sua escolha `cd passenger` ou `cd driver`
+- Rode `npm i` dentro da pasta para instalar o node_modules **(necessario fazer em ambas as pastas)**
 - Execute `npm start` **(dentro da pasta passenger ou driver)** e o app ira rodar
 
 
