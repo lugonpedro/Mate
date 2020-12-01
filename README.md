@@ -1,6 +1,6 @@
 # Mate
 
-![collage](https://user-images.githubusercontent.com/39389740/98458801-2de6fb00-2173-11eb-97b4-e697966f547e.png)
+![MATE](https://user-images.githubusercontent.com/39389740/100693634-106d1180-336c-11eb-997f-16a3fc0ef8e1.png)
 
 ## Para que serve?
 Projeto de TCC pensado com intuito de facilitar o encontro de pessoas que procuram por serviços de onibus/van escolar e seus devidos motoristas
