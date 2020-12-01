@@ -1,12 +1,5 @@
 import React, { useState, useCallback } from "react";
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { View, Image, Text, TouchableOpacity, FlatList } from "react-native";
 import styles from "./styles";
 import logo from "../../../assets/icon.png";
 import { FontAwesome } from "@expo/vector-icons";
@@ -81,103 +74,102 @@ export default function PassengersDetails() {
       </View>
 
       <View style={styles.main}>
-        <SafeAreaView>
-          <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
-            Passageiros
-          </Text>
-          <FlatList
-            data={passengers}
-            renderItem={({ item }) => {
-              return (
-                <View
+        <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
+          Passageiros
+        </Text>
+        <FlatList
+          style={{ height: "48%" }}
+          data={passengers}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  flex: 1,
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  padding: 3,
+                }}
+              >
+                <TouchableOpacity
                   style={{
-                    flex: 1,
-                    alignSelf: "center",
+                    height: 100,
+                    width: 300,
+                    backgroundColor: "white",
+                    borderRadius: 10,
                     justifyContent: "center",
-                    padding: 3,
+                    alignItems: "center",
+                  }}
+                  onPressIn={() => {
+                    setUid(item.id);
+                  }}
+                  onPress={() => {
+                    navigation.navigate("ServiceDetails", {
+                      uid: uid,
+                    });
                   }}
                 >
-                  <TouchableOpacity
+                  <Text
                     style={{
-                      height: 100,
-                      width: 300,
-                      backgroundColor: "white",
-                      borderRadius: 10,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    onPressIn={() => {
-                      setUid(item.id);
-                    }}
-                    onPress={() => {
-                      navigation.navigate("ServiceDetails", {
-                        uid: uid,
-                      });
+                      fontSize: 24,
+                      fontWeight: "bold",
                     }}
                   >
-                    <Text
-                      style={{
-                        fontSize: 24,
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {item.nome}
-                    </Text>
-                    <Text>{item.turno}</Text>
-                    <Text>Telefone: {item.tel}</Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
+                    {item.nome}
+                  </Text>
+                  <Text>{item.turno}</Text>
+                  <Text>Telefone: {item.tel}</Text>
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+        />
 
-          <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
-            Sem Confirmação
-          </Text>
+        <Text style={{ padding: 10, fontSize: 18, fontWeight: "bold" }}>
+          Sem Confirmação
+        </Text>
 
-          <FlatList
-            data={confirmPassengers}
-            renderItem={({ item }) => {
-              return (
-                <View
+        <FlatList
+          data={confirmPassengers}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  flex: 1,
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  padding: 3,
+                }}
+              >
+                <TouchableOpacity
                   style={{
-                    flex: 1,
-                    alignSelf: "center",
+                    height: 50,
+                    width: 300,
+                    backgroundColor: "white",
+                    borderRadius: 10,
                     justifyContent: "center",
-                    padding: 3,
+                    alignItems: "center",
+                  }}
+                  onPressIn={() => {
+                    setUid(item.id);
+                  }}
+                  onPress={() => {
+                    navigation.navigate("ServiceDetails", {
+                      uid: uid,
+                    });
                   }}
                 >
-                  <TouchableOpacity
+                  <Text
                     style={{
-                      height: 50,
-                      width: 300,
-                      backgroundColor: "white",
-                      borderRadius: 10,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    onPressIn={() => {
-                      setUid(item.id);
-                    }}
-                    onPress={() => {
-                      navigation.navigate("ServiceDetails", {
-                        uid: uid,
-                      });
+                      fontSize: 18,
                     }}
                   >
-                    <Text
-                      style={{
-                        fontSize: 18,
-                      }}
-                    >
-                      {item.nome}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
-        </SafeAreaView>
+                    {item.nome}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { View, Image, Text, TouchableOpacity, FlatList } from "react-native";
 import styles from "./styles";
 import logo from "../../../assets/icon.png";
 import { FontAwesome } from "@expo/vector-icons";
@@ -78,64 +71,63 @@ export default function DriverSelection() {
           Motoristas
         </Text>
 
-        <SafeAreaView style={{ padding: 10 }}>
-          <FlatList
-            data={list}
-            renderItem={({ item }) => {
-              return (
-                <View
+        <FlatList
+          style={{ height: "100%" }}
+          data={list}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  padding: 3,
+                }}
+              >
+                <TouchableOpacity
                   style={{
-                    alignSelf: "center",
+                    height: 100,
+                    width: 300,
+                    backgroundColor: "white",
+                    borderRadius: 10,
                     justifyContent: "center",
-                    padding: 3,
+                    alignItems: "center",
+                  }}
+                  onPressIn={() => {
+                    setUid(item.id);
+                  }}
+                  onPress={() => {
+                    navigation.navigate("ServiceDetails", {
+                      uid: uid,
+                    });
                   }}
                 >
-                  <TouchableOpacity
+                  <Text
                     style={{
-                      height: 100,
-                      width: 300,
-                      backgroundColor: "white",
-                      borderRadius: 10,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    onPressIn={() => {
-                      setUid(item.id);
-                    }}
-                    onPress={() => {
-                      navigation.navigate("ServiceDetails", {
-                        uid: uid,
-                      });
+                      fontSize: 24,
+                      fontWeight: "bold",
                     }}
                   >
+                    {item.nome}
+                  </Text>
+                  <Text>{item.turno}</Text>
+                  <Text>{item.local}</Text>
+                  <View style={{ flexDirection: "row" }}>
                     <Text
                       style={{
-                        fontSize: 24,
+                        paddingLeft: 240,
+                        paddingRight: 5,
                         fontWeight: "bold",
                       }}
                     >
-                      {item.nome}
+                      {item.nota.toExponential(2).slice(0, 4)}
                     </Text>
-                    <Text>{item.turno}</Text>
-                    <Text>{item.local}</Text>
-                    <View style={{ flexDirection: "row" }}>
-                      <Text
-                        style={{
-                          paddingLeft: 240,
-                          paddingRight: 5,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.nota.toExponential(2).slice(0, 4)}
-                      </Text>
-                      <FontAwesome name="star" size={18} color={"black"} />
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
-        </SafeAreaView>
+                    <FontAwesome name="star" size={18} color={"black"} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
