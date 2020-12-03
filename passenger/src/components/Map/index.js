@@ -30,10 +30,10 @@ export default class Map extends React.Component {
             longitudeDelta: 0.0134,
           },
         });
-      }, // sucesso
+      },
       () => {
-        Alert.alert("Nao foi possivel obter sua localizacao");
-      }, // erro
+        // mensagem de erro
+      },
       {
         timeout: 3000,
         enableHighAccuracy: true,
