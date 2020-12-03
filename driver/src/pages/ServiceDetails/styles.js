@@ -25,13 +25,10 @@ export default StyleSheet.create({
   main: {
     alignItems: "center",
   },
-  input: {
-    marginTop: 10,
-    padding: 10,
+  text: {
+    padding: 12,
     width: 300,
-    backgroundColor: "#fff",
-    fontSize: 16,
-    borderRadius: 3,
+    fontSize: 14,
   },
   botaoCancelar: {
     top: 10,

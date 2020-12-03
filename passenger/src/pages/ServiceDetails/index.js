@@ -188,30 +188,15 @@ export default function ServiceDetails({ route }) {
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             Nome do Motorista
           </Text>
-          <TextInput
-            placeholder={"Nome do Motorista"}
-            style={styles.input}
-            defaultValue={nome}
-            editable={false}
-          />
+          <Text style={styles.text}>{nome}</Text>
 
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>Telefone</Text>
-          <TextInput
-            placeholder={"Telefone"}
-            style={styles.input}
-            defaultValue={tel}
-            editable={false}
-          />
+          <Text style={styles.text}>{tel}</Text>
 
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             Local de Trabalho
           </Text>
-          <TextInput
-            placeholder={"Local de Trabalho"}
-            style={styles.input}
-            defaultValue={local}
-            editable={false}
-          />
+          <Text style={styles.text}>{local}</Text>
 
           <Text
             style={{
