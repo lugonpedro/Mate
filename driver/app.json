@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "MATEd",
+    "name": "MATE Motorista",
     "slug": "MATEd",
     "version": "0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconlogo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

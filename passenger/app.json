@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "MATEp",
+    "name": "MATE Passageiro",
     "slug": "MATEp",
     "version": "0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconlogo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
