@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "MATE Motorista",
+    "name": "MATE-M",
     "slug": "MATEd",
-    "version": "0.1",
+    "version": "1.0",
     "orientation": "portrait",
     "icon": "./assets/iconlogo.png",
     "splash": {
@@ -23,7 +23,7 @@
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.m0tt4.MATEp",
+      "package": "com.MATE.Motorista",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAGBbXF9Uoon0qFrlcJ8E7viGEUb93e1n4"
