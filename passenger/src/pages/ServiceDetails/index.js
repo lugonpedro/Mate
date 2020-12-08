@@ -157,7 +157,7 @@ export default function ServiceDetails({ route }) {
         voted: true,
       })
       .then((resultado) => {
-        Alert.alert("Obrigado pelo feedback!");
+        Alert.alert("Obrigado por dar feedback!");
       });
 
     setVoted(true);
@@ -353,7 +353,7 @@ export default function ServiceDetails({ route }) {
             sendWpp();
           }}
         >
-          <Text style={styles.botaoText}>Conversar pelo WhatsApp</Text>
+          <Text style={styles.botaoText}>Conversar por WhatsApp</Text>
         </TouchableOpacity>
       </View>
     </View>

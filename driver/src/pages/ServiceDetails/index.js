@@ -218,7 +218,7 @@ export default function ServiceDetails({ route }) {
             sendWpp();
           }}
         >
-          <Text style={styles.botaoText}>Conversar pelo WhatsApp</Text>
+          <Text style={styles.botaoText}>Conversar por WhatsApp</Text>
         </TouchableOpacity>
       </View>
     </View>
